@@ -32,7 +32,7 @@ const orderSchema = new mongoose.Schema({
         
     },
     orderZip: {
-        type: Number,
+        type: String,
       
     },
     orderPhone: {
