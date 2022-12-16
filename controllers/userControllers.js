@@ -711,17 +711,17 @@ const payment = async (req, res, next) => {
         console.log(fullorder);
         const orderid = fullorder._id // to get id of latest order
 
-        // if (fullorder.paymentType == "COD") {
-        //     const del = await Cart.deleteMany({ userID: req.session.userId })
-        //     const order = await Order.findOneAndUpdate({ _id: orderid }, { $set: { status: 'billed' } })
-        //     const totalprice = ''
-        //     const count = 0
+        if (fullorder.paymentType == "COD") {
+            const del = await Cart.deleteMany({ userID: req.session.userId })
+            const order = await Order.findOneAndUpdate({ _id: orderid }, { $set: { status: 'billed' } })
+            const totalprice = ''
+            const count = 0
 
-        //     res.render('orderSuccess', { count: count, totalprice: totalprice })
+            res.render('orderSuccess', { count: count, totalprice: totalprice })
 
-        // } else {
+        } else {
             res.render('paypal', { cart: '', order: fullorder, count: '', totalprice: '' })
-        //}
+        }
 
         // else if (fullorder.paymentType == "razorPay") { //need to update
         //     const del = await Cart.deleteMany({ userID: req.session.userId })
