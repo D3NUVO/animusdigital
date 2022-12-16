@@ -499,7 +499,7 @@ const onClickProduct = async (req, res) => {
                 const id = req.query.id
                 const productData = await Product.findById({ _id: id })
                 if (productData) {
-                    res.render('product-details', { products: productData,count: count, totalprice: '' })
+                    res.render('product-details', { products: productData, count: count, totalprice: '' })
                 }
                 else {
                     res.redirect('/')
@@ -508,7 +508,7 @@ const onClickProduct = async (req, res) => {
                 const id = req.query.id
                 const productData = await Product.findById({ _id: id })
                 if (productData) {
-                    res.render('product-details', { products: productData,count: 0, totalprice: '' })
+                    res.render('product-details', { products: productData, count: 0, totalprice: '' })
                 }
                 else {
                     res.redirect('/')
@@ -518,7 +518,7 @@ const onClickProduct = async (req, res) => {
             const id = req.query.id
             const productData = await Product.findById({ _id: id })
             if (productData) {
-                res.render('product-details', { products: productData,count: 0, totalprice: '' })
+                res.render('product-details', { products: productData, count: 0, totalprice: '' })
             }
             else {
                 res.redirect('/')
@@ -712,23 +712,8 @@ const payment = async (req, res, next) => {
         const orderid = fullorder._id // to get id of latest order
 
 
-        if (fullorder.paymentType == "payPal") {
-            res.render('paypal', { cart: '', order: fullorder, count: '', totalprice: '' })
-        }
-        else if (fullorder.paymentType == "razorPay") { //need to update
-            const del = await Cart.deleteMany({ userID: req.session.userId })
-            const order = await Order.findOne({ _id: orderid })
-            const totalprice = ''
-            const count = 0
 
-            Order.status = 'billed'
-            await order.save()
-
-            res.render('orderSuccess', { count: count, totalprice: totalprice })
-
-
-        }
-        else if (fullorder.paymentType == "COD") {
+        if (fullorder.paymentType == "COD") {
             const del = await Cart.deleteMany({ userID: req.session.userId })
             const order = await Order.findOneAndUpdate({ _id: orderid }, { $set: { status: 'billed' } })
             const totalprice = ''
@@ -736,7 +721,24 @@ const payment = async (req, res, next) => {
 
             res.render('orderSuccess', { count: count, totalprice: totalprice })
 
+        } else {
+            res.render('paypal', { cart: '', order: fullorder, count: '', totalprice: '' })
         }
+
+        // else if (fullorder.paymentType == "razorPay") { //need to update
+        //     const del = await Cart.deleteMany({ userID: req.session.userId })
+        //     const order = await Order.findOne({ _id: orderid })
+        //     const totalprice = ''
+        //     const count = 0
+
+        //     Order.status = 'billed'
+        //     await order.save()
+
+        //     res.render('orderSuccess', { count: count, totalprice: totalprice })
+
+
+        // }
+
     } catch (error) {
         console.log(error.message);
     }
