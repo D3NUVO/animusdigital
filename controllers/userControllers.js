@@ -128,7 +128,7 @@ const otpValidation = async (req, res) => { // run when clicking the otp validat
             const test = await validatedUser.save();
             if (test) {
                 console.log("User validated successfully...");
-                res.redirect('/')
+                res.redirect('/signin')
             } else {
                 res.render('otp', { message: "Incorrect OTP" })
             }
