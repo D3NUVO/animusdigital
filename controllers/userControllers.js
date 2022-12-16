@@ -652,7 +652,7 @@ const placeOrder = async (req, res, next) => {
             totalPrice: req.session.totalPrice
 
         })
-            order.save();
+            await order.save();
             res.redirect('/to-payment')
 
     } catch (error) {
