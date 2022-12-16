@@ -235,7 +235,7 @@ const userDashBoard = async (req, res) => {
                     res.render('dashboard', { fullorder: fullorder, order: userOrder, count: count, totalprice: '' })
                 }
             } else {
-                res.render('dashboard', { fullorder: fullorder, order: '', count: 0, totalprice: '' })
+                res.render('dashboard', { fullorder: fullorder, order: userOrder, count: 0, totalprice: '' })
             }
         } else {
             res.render('dashboard', { fullorder: fullorder, order: '', fullorder: '', count: 0, totalprice: '' })
