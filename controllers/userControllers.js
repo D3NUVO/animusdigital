@@ -652,16 +652,8 @@ const placeOrder = async (req, res, next) => {
             totalPrice: req.session.totalPrice
 
         })
-        if (req.body.payment != null) {
-            order.save(() => {
-                res.redirect('/to-payment')
-            })
-
-        } else {
-            res.redirect('/check-out')
-            console.log("Payment Option Not selected");
-            res.send("Payment Option Not selected")
-        }
+            order.save();
+            res.redirect('/to-payment')
 
     } catch (error) {
         console.log(error);
@@ -716,7 +708,6 @@ const payment = async (req, res, next) => {
             const order = await Order.findOneAndUpdate({ _id: orderid }, { $set: { status: 'billed' } })
             const totalprice = ''
             const count = 0
-
             res.render('orderSuccess', { count: count, totalprice: totalprice })
 
         } else {
