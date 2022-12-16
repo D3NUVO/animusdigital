@@ -223,6 +223,7 @@ const userDashBoard = async (req, res) => {
     try {
         const fullorder = await User.findOne({ userID: req.session.userId })
         const userCart = await Cart.findOne({ userID: req.session.userId })
+        const userOrder = await Order.find({ userID: req.session.userId })
         console.log(fullorder.createdAt);
         //var date = new Date(fullorder.createdAt).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
         if (fullorder) {
@@ -232,7 +233,7 @@ const userDashBoard = async (req, res) => {
                 if (userOrder) {
                     res.render('dashboard', { fullorder: fullorder, order: userOrder, count: count, totalprice: '' })
                 } else {
-                    res.render('dashboard', { fullorder: fullorder, order: '', count: count, totalprice: '' })
+                    res.render('dashboard', { fullorder: fullorder, order: userOrder, count: count, totalprice: '' })
                 }
             } else {
                 res.render('dashboard', { fullorder: fullorder, order: '', count: 0, totalprice: '' })
