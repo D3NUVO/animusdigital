@@ -229,7 +229,6 @@ const userDashBoard = async (req, res) => {
         if (fullorder) {
             if (userCart) {
                 const count = userCart.cartProduct.length
-                const userOrder = await Order.find({ userID: req.session.userId })
                 if (userOrder) {
                     res.render('dashboard', { fullorder: fullorder, order: userOrder, count: count, totalprice: '' })
                 } else {
