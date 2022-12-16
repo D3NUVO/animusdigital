@@ -1,0 +1,422 @@
+<% if(userSession) { %>
+    <%- include('../partials/userHeader',{count:count, totalprice:totalprice}) %>
+        <% }else{ %>
+            <%- include('../partials/header') %>
+                <% } %>
+                    <!-- End .header -->
+
+
+                    <main class="main">
+                        <div class="intro-slider-container mb-3 mb-lg-5">
+                            <div id="curusel" class="intro-slider owl-carousel owl-simple owl-nav-inside owl-light"
+                                data-ride="carousel" data-toggle="owl"
+                                data-owl-options='{"nav":true, "dots": true, "loop": true}'>
+                                <div class="intro-slide"
+                                    style="background-image: url(https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/community/wallpapers/download-these-batman-arkham-knight-wallpapers/NV_TWIMTBP_BatmanAK_wallpapers_Arkham_Knight_1920x1080.jpg);">
+                                    <div class="container intro-content text-center">
+                                        <h3 class="intro-subtitle text-white">SEASONAL PICKS</h3>
+                                        <!-- End .h3 intro-subtitle -->
+                                        <h1 class="intro-title text-white">Get All The Good Stuff</h1>
+                                        <!-- End .intro-title -->
+
+                                        <a href="/product-store" class="btn btn-outline-white">
+                                            <span>DISCOVER MORE</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </a>
+                                    </div><!-- End .intro-content -->
+                                </div>
+                                <div class="intro-slide"
+                                    style="background-image: url(https://img.alicdn.com/imgextra/i1/6000000006403/O1CN01VrWyTz1xAce3jLjcY_!!6000000006403-0-tbvideo.jpg);">
+                                    <div class="container intro-content text-center">
+                                        <h3 class="intro-subtitle text-white">ADVANCED</h3>
+                                        <!-- End .h3 intro-subtitle -->
+                                        <h1 class="intro-title text-white">High Performance Rigs</h1>
+                                        <!-- End .intro-title -->
+
+                                        <a href="/product-store" class="btn btn-outline-white">
+                                            <span>DISCOVER MORE</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </a>
+                                    </div><!-- End .intro-content -->
+                                </div>
+                                <div class="intro-slide"
+                                    style="background-image: url(https://getwallpapers.com/wallpaper/full/2/4/f/43281.jpg);">
+                                    <div class="container intro-content text-center">
+                                        <h3 class="intro-subtitle text-white">FROM THE MANUFACTURES</h3>
+                                        <!-- End .h3 intro-subtitle -->
+                                        <h1 class="intro-title text-white">Nvidia AMD INTEL</h1>
+                                        <!-- End .intro-title -->
+
+                                        <a href="/product-store" class="btn btn-outline-white">
+                                            <span>DISCOVER MORE</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </a>
+                                    </div><!-- End .intro-content -->
+                                </div><!-- End .intro-slide -->
+                            </div><!-- End .intro-slider owl-carousel owl-simple -->
+
+                            <span class="slider-loader text-white"></span><!-- End .slider-loader -->
+                        </div><!-- End .intro-slider-container -->
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="banner banner-display banner-link-anim banner-title-hidden">
+                                        <a href="/product-store">
+                                            <img src="https://i.pinimg.com/originals/35/a6/c1/35a6c1712f81b96b5c4ced5284446ff2.jpg" alt="Banner" style="height: 87vh;">
+                                        </a>
+
+                                        <div class="banner-content banner-content-center">
+                                            <h3 class="banner-title text-white"><a href="/product-store">This Week's Most Wanted</a>
+                                            </h3>
+                                            <!-- End .banner-title -->
+                                            <a href="/product-store" class="btn btn-outline-white banner-link">Shop Now</a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                </div><!-- End .col-md-6 -->
+
+                                <div class="col-md-6">
+                                    <div class="banner banner-display banner-link-anim banner-title-hidden">
+                                        <a href="/product-store">
+                                            <img src="https://gamernetwork.bbvms.com/mediaclip/3942730/pthumbnail/688/388.jpg" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content banner-content-center">
+                                            <h3 class="banner-title text-white"><a href="/product-store">High End Performance</a></h3>
+                                            <!-- End .banner-title -->
+                                            <a href="/product-store" class="btn btn-outline-white banner-link">Discover Now</a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                    <div class="banner banner-display banner-link-anim banner-title-hidden">
+                                        <a href="/product-store">
+                                            <img src="https://assets2.rockpapershotgun.com/Intel-Arc-A380.PNG/BROK/thumbnail/1600x900/quality/100/Intel-Arc-A380.PNG" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content banner-content-center">
+                                            <h3 class="banner-title text-white"><a href="/product-store">The Trending Tech</a></h3>
+                                            <!-- End .banner-title -->
+                                            <a href="/product-store" class="btn btn-outline-white banner-link">Shop Now</a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                </div><!-- End .col-md-6 -->
+                            </div><!-- End .row -->
+
+                            <div class="mb-3"></div><!-- End .mb-3 -->
+                        </div><!-- End .container -->
+
+                        <div class="bg-lighter pt-5 pb-5 mb-5">
+                            <div class="container">
+                                <div class="heading text-center mb-4">
+                                    <h2 class="title">Recent Arrivals</h2><!-- End .title -->
+                                    <p class="title-desc">Most Recently Updated Products</p><!-- End .title-desc -->
+                                </div><!-- End .heading -->
+
+                                <div class="owl-carousel owl-simple" data-toggle="owl" data-owl-options='{
+                            "nav": true, 
+                            "dots": false,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":2
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true
+                                }
+                            }
+                        }'>
+
+                                    <!-- End .product -->
+
+                                    <% if( products.length> 0){ %>
+                                        <% for(let i=1;i <=products.length; i++){ %>
+
+                                            <div class="product product-4 text-center">
+                                                <figure class="product-media">
+                                                    <!-- <span class="product-label label-primary">Sale</span> -->
+                                                    <!-- <span class="product-label label-new">New</span> -->
+                                                    <a href="/product-details?id=<%= products[i-1]._id %>">
+                                                        <img src="./productImages/<%= products[i-1].productImage %>"
+                                                            alt="Product image" class="product-image">
+                                                        <img src="./productImages/<%= products[i-1].productImage %>"
+                                                            alt="Product image" class="product-image-hover">
+                                                    </a>
+
+                                                    <div class="product-action-vertical">
+                                                        <a href="/add-wishlist?id=<%= products[i-1]._id %>"
+                                                            class="btn-product-icon btn-wishlist btn-expandable"><span>add
+                                                                to
+                                                                wishlist</span></a>
+                                                        
+                                                    </div><!-- End .product-action -->
+
+                                                    <form action="/add-cart?id=<%= products[i-1]._id %>" method="post">
+                                                        <div class="product-action">
+                                                            <button class="btn-product btn-cart"><span>add to
+                                                                    cart</span></button>
+                                                        </div>
+                                                    </form><!-- End .product-action -->
+                                                </figure><!-- End .product-media -->
+
+                                                <div class="product-body">
+                                                    <div class="product-cat">
+                                                        <a href="#">Graphics Card</a>
+                                                    </div><!-- End .product-cat -->
+                                                    <h3 class="product-title"><a href="product.html">
+                                                            <%= products[i-1].productName %>
+                                                        </a></h3>
+                                                    <!-- End .product-title -->
+
+                                                    <div class="product-price">
+                                                        <span class="new-price">Now ₹<%= products[i-1].productPrice %>
+                                                        </span>
+                                                        <!-- <span class="old-price">Was $84.00</span> -->
+                                                    </div><!-- End .product-price -->
+                                                </div><!-- End .product-body -->
+                                            </div><!-- End .product -->
+
+                                            <% }} %>
+
+                                                <!-- End .product -->
+                                </div><!-- End .owl-carousel -->
+                            </div><!-- End .container -->
+                        </div><!-- End .bg-lighter pt-5 pb-5 -->
+
+
+
+
+                        <div class="container">
+                            <div class="heading text-center mb-4">
+                                <h2 class="title">Popular Categories</h2><!-- End .title -->
+                                <p class="title-desc">NVIDIA | AMD | INTEL</p><!-- End .title-desc -->
+                            </div><!-- End .heading -->
+
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="banner banner-display banner-link-anim">
+                                        <a href="/product-store">
+                                            <img src="https://cdn57.androidauthority.net/wp-content/uploads/2017/11/Google-Servers-3.jpg" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content banner-content-center">
+                                            <h3 class="banner-title text-white"><a href="/product-store">Accessories for Servers</a></h3>
+                                            <!-- End .banner-title -->
+                                            <h4 class="banner-subtitle text-white"><a href="/product-store">More Items</a></h4>
+                                            <!-- End .banner-subtitle -->
+                                            <a href="/product-store" class="btn btn-outline-white banner-link">Shop Now</a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6 col-lg-4 order-lg-last">
+                                    <div class="banner banner-display banner-link-anim">
+                                        <a href="/product-store">
+                                            <img src="https://www.smartprix.com/bytes/wp-content/uploads/2022/03/Intel-Arc.jpg" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content banner-content-center">
+                                            <h3 class="banner-title text-white"><a href="/product-store">Intel New Arc</a></h3>
+                                            <!-- End .banner-title -->
+                                            <h4 class="banner-subtitle text-white"><a href="/product-store">More Items</a></h4>
+                                            <!-- End .banner-subtitle -->
+                                            <a href="/product-store" class="btn btn-outline-white banner-link">Shop Now</a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-lg-12">
+                                            <div class="banner banner-display banner-link-anim">
+                                                <a href="/product-store">
+                                                    <img src="https://assets.reedpopcdn.com/intel-arc-graphics-launch-in-laptops-first-performance-figures-revealed-1648657272717.jpg/BROK/thumbnail/1600x900/quality/100/intel-arc-graphics-launch-in-laptops-first-performance-figures-revealed-1648657272717.jpg"
+                                                        alt="Banner">
+                                                </a>
+
+                                                <div class="banner-content banner-content-center">
+                                                    <h3 class="banner-title text-white"><a href="/product-store">A Series Cloud</a>
+                                                    </h3>
+                                                    <!-- End .banner-title -->
+                                                    <h4 class="banner-subtitle text-white"><a href="/product-store">More Items</a>
+                                                    </h4>
+                                                    <!-- End .banner-subtitle -->
+                                                    <a href="/product-store" class="btn btn-outline-white banner-link">Discover
+                                                        Now</a>
+                                                </div><!-- End .banner-content -->
+                                            </div><!-- End .banner -->
+                                        </div><!-- End .col-sm-6 -->
+
+                                        <div class="col-sm-6 col-lg-12">
+                                            <div class="banner banner-display banner-link-anim">
+                                                <a href="/product-store">
+                                                    <img src="https://imageio.forbes.com/blogs-images/janakirammsv/files/2018/04/nvidia-dgx2-1200x622.jpg?height=368&width=711&fit=bounds"
+                                                        alt="Banner">
+                                                </a>
+
+                                                <div class="banner-content banner-content-center">
+                                                    <h3 class="banner-title text-white"><a href="/product-store">Nivida DGX-2</a></h3>
+                                                    <!-- End .banner-title -->
+                                                    <h4 class="banner-subtitle text-white"><a href="/product-store">More Items</a>
+                                                    </h4>
+                                                    <!-- End .banner-subtitle -->
+                                                    <a href="/product-store" class="btn btn-outline-white banner-link">Shop
+                                                        Now</a>
+                                                </div><!-- End .banner-content -->
+                                            </div><!-- End .banner -->
+                                        </div><!-- End .col-sm-6 -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .col-lg-6 -->
+                            </div><!-- End .row -->
+
+                            <div class="icon-boxes-container bg-transparent">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="icon-box icon-box-side">
+                                                <span class="icon-box-icon">
+                                                    <i class="icon-rocket"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <h3 class="icon-box-title">Free Shipping</h3>
+                                                    <!-- End .icon-box-title -->
+                                                    <p>Orders $50 or more</p>
+                                                </div><!-- End .icon-box-content -->
+                                            </div><!-- End .icon-box -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="icon-box icon-box-side">
+                                                <span class="icon-box-icon">
+                                                    <i class="icon-rotate-left"></i>
+                                                </span>
+
+                                                <div class="icon-box-content">
+                                                    <h3 class="icon-box-title">Free Returns</h3>
+                                                    <!-- End .icon-box-title -->
+                                                    <p>Within 30 days</p>
+                                                </div><!-- End .icon-box-content -->
+                                            </div><!-- End .icon-box -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="icon-box icon-box-side">
+                                                <span class="icon-box-icon">
+                                                    <i class="icon-info-circle"></i>
+                                                </span>
+
+                                                <div class="icon-box-content">
+                                                    <h3 class="icon-box-title">Get 20% Off 1 Item</h3>
+                                                    <!-- End .icon-box-title -->
+                                                    <p>When you sign up</p>
+                                                </div><!-- End .icon-box-content -->
+                                            </div><!-- End .icon-box -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="icon-box icon-box-side">
+                                                <span class="icon-box-icon">
+                                                    <i class="icon-life-ring"></i>
+                                                </span>
+
+                                                <div class="icon-box-content">
+                                                    <h3 class="icon-box-title">We Support</h3>
+                                                    <!-- End .icon-box-title -->
+                                                    <p>24/7 amazing services</p>
+                                                </div><!-- End .icon-box-content -->
+                                            </div><!-- End .icon-box -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .container -->
+                            </div><!-- End .icon-boxes-container -->
+                        </div><!-- End .container -->
+                    </main><!-- End .main -->
+
+
+
+                    <%- include('../partials/footer') %>
+
+
+
+                        <!-- End .footer -->
+                        </div><!-- End .page-wrapper -->
+                        <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+                        <!-- Mobile Menu -->
+                        <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+                        <%- include('../partials/mobileView') %>
+                            <!-- End .mobile-menu-container -->
+
+                            
+
+                            <!-- Plugins JS File -->
+                            <script src="assets/js/jquery.min.js"></script>
+                            <script src="assets/js/bootstrap.bundle.min.js"></script>
+                            <script src="assets/js/jquery.hoverIntent.min.js"></script>
+                            <script src="assets/js/jquery.waypoints.min.js"></script>
+                            <script src="assets/js/superfish.min.js"></script>
+                            <script src="assets/js/owl.carousel.min.js"></script>
+                            <script src="assets/js/bootstrap-input-spinner.js"></script>
+                            <script src="assets/js/jquery.magnific-popup.min.js"></script>
+
+                            <!-- Main JS File -->
+                            <script src="assets/js/main.js"></script>
+                            <script src="assets/js/demos/demo-12.js"></script>
+
+                            <script>
+                                var owl = $('#curusel');
+                                owl.owlCarousel({
+                                    items: 1,
+                                    nav:true,
+                                    loop: true,
+                                    //margin: 10,
+                                    smartSpeed:1000,
+                                    autoplay: 1,
+                                    autoplayTimeout: 5000,
+                                    autoplayHoverPause: false
+                                });
+                            </script>
+                            <script>
+                                var owl = $('.owl-carousel');
+                                owl.owlCarousel({
+                                    responsive: {
+                                        "0": {
+                                            "items": 1
+                                        },
+                                        "600": {
+                                            "items": 2
+                                        },
+                                        "992": {
+                                            "items": 3
+                                        },
+                                        "1200": {
+                                            "items": 4
+                                        }
+                                    },
+                                    loop: true,
+                                    nav:true,
+                                    margin: 15,
+                                    autoplay: 1,
+                                    smartSpeed:800,
+                                    autoplayTimeout: 4000,
+                                    autoplayHoverPause: true
+                                });
+                            </script>
+
+                            </body>
+
+
+                            <!-- molla/index-12.html  22 Nov 2019 09:58:58 GMT -->
+
+                            </html>

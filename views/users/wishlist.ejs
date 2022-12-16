@@ -1,0 +1,123 @@
+<%- include('../partials/userHeader',{count:count, totalprice:totalprice}) %>
+    <!-- End .header -->
+
+    <main class="main">
+        <div class="page-header text-center"
+            style="background-image: url('https://images.hdqwalls.com/download/blur-background-6z-1920x1080.jpg')">
+            <div class="container">
+                <h1 class="page-title">Wishlist<span>Shop</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="container">
+                <% var userid %>
+                        <% if(userid) { %>
+                            <% if(wishProducts.length) { %>
+                <table class="table table-wishlist table-mobile">
+                    
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Stock Status</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <% for(let i=1;i <=wishProducts.length; i++){ %>
+                                        <tr>
+                                            <td class="product-col">
+                                                <div class="product">
+                                                    <figure class="product-media">
+                                                        <a href="#">
+                                                            <img src="/productImages/<%= wishProducts[i-1].productID.productImage %>"
+                                                                alt="Product image">
+                                                        </a>
+                                                    </figure>
+
+                                                    <h3 class="product-title">
+                                                        <a href="#">
+                                                            <%= wishProducts[i-1].productID.productName %>
+                                                        </a>
+                                                    </h3><!-- End .product-title -->
+                                                </div><!-- End .product -->
+                                            </td>
+                                            <td class="price-col">$<%= wishProducts[i-1].productID.productPrice %>
+                                            </td>
+                                            <td class="stock-col"><span class="in-stock">In stock</span></td>
+                                            <td class="action-col">
+                                                <form action="/wish-add-cart?id=<%= wishProducts[i-1].productID._id %>"
+                                                    method="post">
+                                                    <button class="btn btn-block btn-outline-primary-2"><i
+                                                            class="icon-cart-plus"></i>Add to
+                                                        Cart</button>
+                                                    <input type="hidden" name="wishid"
+                                                        value="<%= wishProducts[i-1]._id %>">
+                                                </form>
+                                            </td>
+                                            <td class="remove-col">
+                                                <form action="/delwishlist?id=<%= wishProducts[i-1]._id %>" method="post">
+                                                    <button type="submit" class="btn-remove"><i class="icon-close"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                </table>
+
+                <% }else{ %>
+                    <h4>The WishList Is Empty. <br> Add some <a href="/product-store">Products now</a> </h4>
+
+                    <% }%>
+                        <%}else{ %>
+                            <h4>You Are Not Signed In.<br>Please Login Now
+                            </h4>
+                            <a href="/signin" class="btn btn-primary ml-2">login</a>
+
+                            <%}%>
+                                <!-- End .table table-wishlist -->
+                                <!-- End .wishlist-share -->
+            </div><!-- End .container -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    <%- include('../partials/footer') %> <!-- End .footer -->
+        </div><!-- End .page-wrapper -->
+        <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+        <%- include('../partials/mobileView') %>
+            <!-- End .mobile-menu-container -->
+
+            <!-- Sign in / Register Modal -->
+            <!-- End .modal -->
+
+            <!-- Plugins JS File -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/jquery.hoverIntent.min.js"></script>
+            <script src="assets/js/jquery.waypoints.min.js"></script>
+            <script src="assets/js/superfish.min.js"></script>
+            <script src="assets/js/owl.carousel.min.js"></script>
+            <!-- Main JS File -->
+            <script src="assets/js/main.js"></script>
+            </body>
+
+
+            <!-- molla/wishlist.html  22 Nov 2019 09:55:06 GMT -->
+
+            </html>

@@ -1,0 +1,358 @@
+<%- include('../partials/userHeader',{count:count, totalprice:totalprice}) %>
+
+    <!-- End .header -->
+
+    <main class="main">
+        <div class="page-header text-center"
+            style="background-image: url('https://images.hdqwalls.com/download/blur-background-6z-1920x1080.jpg')">
+            <div class="container">
+                <h1 class="page-title mt-1">My Account<span>Shop</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container">
+                    <div class="row">
+                        <aside class="col-md-4 col-lg-3">
+                            <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab"
+                                        href="#tab-dashboard" role="tab" aria-controls="tab-dashboard"
+                                        aria-selected="true">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"
+                                        role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads"
+                                        role="tab" aria-controls="tab-downloads" aria-selected="false">Downloads</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address"
+                                        role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-editaddress-link" data-toggle="tab"
+                                        href="#tab-editaddress" role="tab" aria-controls="tab-editaddress"
+                                        aria-selected="false">Edit Details</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account"
+                                        role="tab" aria-controls="tab-account" aria-selected="false">Account
+                                        Details</a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a id="logout" class="nav-link" href="/logout">Sign Out</a>
+                                </li>
+                            </ul>
+                        </aside><!-- End .col-lg-3 -->
+
+                        <div class="col-md-8 col-lg-9">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
+                                    aria-labelledby="tab-dashboard-link">
+                                    <p>Hello <span class="font-weight-normal text-dark"><%=fullorder.firstname%></span>
+                                        <br>
+                                        From your account dashboard you can view your <a href="#tab-orders"
+                                            class="tab-trigger-link link-underline">recent orders</a>, manage your
+                                        <a href="#tab-address" class="tab-trigger-link">shipping
+                                            addresses</a>.
+                                    </p>
+
+
+                                </div><!-- .End .tab-pane -->
+
+
+
+                                <div class="tab-pane fade table-responsive" id="tab-orders" role="tabpanel"
+                                    aria-labelledby="tab-orders-link">
+
+
+                                    <table class="table" style="table-layout: fixed;">
+                                        <% if(order.length> 0) { %>
+                                            <thead>
+                                                <tr>
+
+                                                    <th scope="col">
+                                                        <h6>No:</h6>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <h6>Date</h6>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <h6>Payment type</h6>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <h6>Amount</h6>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <h6>Status</h6>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <h6>action</h6>
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(let i=1;i<=order.length;i++) { %>
+                                                    <tr>
+                                                        <th scope="row">&nbsp;&nbsp;&nbsp;<%=i%>
+                                                        </th>
+                                                        <td>
+                                                            <%=order[i-1].createdAt %>
+                                                        </td>
+                                                        <td>
+                                                            &nbsp;&nbsp;&nbsp;<%=order[i-1].paymentType %>
+                                                        </td>
+                                                        <td>₹&nbsp;<%=order[i-1].totalPrice %>
+                                                        </td>
+                                                        <td>
+                                                            <%=order[i-1].status %>
+                                                        </td>
+                                                        <td>
+                                                            <form action="/order-details?id=<%=order[i-1]._id%>"
+                                                                method="post">
+
+                                                                <button class="btn btn-outline-primary-2" type="submit">
+                                                                    Details
+                                                                </button>
+
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                    <% }} else{ %>
+                                                        <p>No order has been made yet.</p>
+                                                        <% } %>
+                                            </tbody>
+                                    </table>
+
+                                    <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i
+                                            class="icon-long-arrow-right"></i></a>
+
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-downloads" role="tabpanel"
+                                    aria-labelledby="tab-downloads-link">
+                                    <p>No downloads available yet.</p>
+                                    <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i
+                                            class="icon-long-arrow-right"></i></a>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-address" role="tabpanel"
+                                    aria-labelledby="tab-address-link">
+                                    <p>The following addresses will be used on the checkout page by default.</p>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="card card-dashboard">
+                                                <div class="card-body">
+                                                    <h3 class="card-title">Shipping Address</h3>
+                                                    <!-- End .card-title -->
+
+                                                    <p>
+                                                        <%=fullorder.firstname%>,<br>
+                                                            <%=fullorder.Apartment%>,<br>
+                                                                <%=fullorder.StreetAddress%>,<br>
+                                                                    <%=fullorder.City%>,<%=fullorder.State%>,<br>
+                                                                            <%=fullorder.postcode%>,<br>
+                                                                                <%=fullorder.Country%>,<br>
+                                                                                    <%=fullorder.mobileno%>,<br>
+                                                                                        <%=fullorder.email%><br>
+
+                                                    </p>
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .card-dashboard -->
+                                        </div><!-- End .col-lg-6 -->
+
+                                        <!-- End .card-dashboard -->
+                                    </div><!-- End .col-lg-6 -->
+                                </div><!-- End .row -->
+
+
+
+                                <div class="tab-pane fade" id="tab-editaddress" role="tabpanel"
+                                    aria-labelledby="tab-editaddress-link">
+                                    <form action="/editaddress" method="post">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>Name *</label>
+                                                <input name="firstname" value="<%=fullorder.firstname%>" type="text"
+                                                    class="form-control" required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Company Name </label>
+                                                <input name="CompanyName" value="<%=fullorder.CompanyName%>" type="text"
+                                                    class="form-control">
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <label>Country *</label>
+                                        <input name="Country" value="<%=fullorder.Country%>" type="text"
+                                            class="form-control" required>
+
+                                        <label>Street address *</label>
+                                        <input name="StreetAddress" value="<%=fullorder.StreetAddress%>" type="text"
+                                            class="form-control" required>
+                                        <label>Apartment </label>
+                                        <input name="Apartment" value="<%=fullorder.Apartment%>" type="text"
+                                            class="form-control">
+
+                                        <label>Town/City</label>
+                                        <input name="City" value="<%=fullorder.City%>" type="text" class="form-control"
+                                            required>
+
+                                        <label>State</label>
+                                        <input name="State" value="<%=fullorder.State%>" type="text"
+                                            class="form-control" required>
+
+                                        <label>Postcode/ZIP</label>
+                                        <input name="postcode" value="<%=fullorder.postcode%>" type="text"
+                                            class="form-control mb-2" required>
+
+                                        <label>Mobile</label>
+                                        <input name="mobileno" value="<%=fullorder.mobileno%>" type="text"
+                                            class="form-control mb-2" required>
+
+                                        <label>Email address</label>
+                                        <input name="email" value="<%=fullorder.email%>" type="email"
+                                            class="form-control mb-2" required>
+
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </form>
+                                </div>
+
+
+
+                                <div class="tab-pane fade" id="tab-account" role="tabpanel"
+                                    aria-labelledby="tab-account-link">
+                                    <form action="#">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>First Name *</label>
+                                                <input type="text" class="form-control" required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Last Name *</label>
+                                                <input type="text" class="form-control" required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <label>Display Name *</label>
+                                        <input type="text" class="form-control" required>
+                                        <small class="form-text">This will be how your name will be displayed in the
+                                            account section and in reviews</small>
+
+                                        <label>Email address *</label>
+                                        <input type="email" class="form-control" required>
+
+                                        <label>Current password (leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control">
+
+                                        <label>New password (leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control">
+
+                                        <label>Confirm new password</label>
+                                        <input type="password" class="form-control mb-2">
+
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+
+    <%- include('../partials/footer') %>
+
+        <!-- End .footer -->
+        </div><!-- End .page-wrapper -->
+        <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+        <%- include('../partials/mobileView') %>
+            <!-- End .mobile-menu-container -->
+
+            <!-- Sign in / Register Modal -->
+
+
+            <!-- End .modal -->
+
+            <!-- Plugins JS File -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/jquery.hoverIntent.min.js"></script>
+            <script src="assets/js/jquery.waypoints.min.js"></script>
+            <script src="assets/js/superfish.min.js"></script>
+            <script src="assets/js/owl.carousel.min.js"></script>
+            <!-- Main JS File -->
+            <script src="assets/js/main.js"></script>
+
+
+
+
+
+
+
+            <script>
+
+                $("#logout").on("click", function (e) {
+                    e.preventDefault()
+                    var self = $(this)
+                    Swal.fire({
+                        title: 'Are you sure you want to logout?',
+                        text: "",
+                        icon: 'Confirm Logout',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Logout!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            location.href = self.attr("href")
+                        }
+                    })
+
+                })
+
+            </script>
+
+
+
+
+            <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+                integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+            </body>
+
+
+            <!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+
+            </html>

@@ -1,0 +1,64 @@
+<%- include('../partials/userHeader',{count:count, totalprice:totalprice}) %>
+
+    <!-- End .header -->
+
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('https://images.hdqwalls.com/download/blur-background-6z-1920x1080.jpg')">
+            <div class="container">
+                <h1 class="page-title mt-1">Dashboard<span>OrderDeatils</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">order details</li>
+                </ol>
+                <a href="http://localhost:3000/dashboard#tab-orders" class="btn btn-primary">back to order</a>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+
+
+        <div class="page-content">
+            <div class="checkout">
+                <div class="container">
+                    <h2>Your Order has Been saved Successfully !</h2>
+                    <form action="/payment?id=<%= order._id %>" method="post">
+                        <button type="submit">Continue To Payment</button>
+                    </form>
+                </div><!-- End .container -->
+            </div><!-- End .checkout -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    <%- include('../partials/footer') %>
+        <!-- End .footer -->
+        </div><!-- End .page-wrapper -->
+        <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+        <%- include('../partials/mobileView') %>
+            <!-- End .mobile-menu-container -->
+
+            <!-- Sign in / Register Modal -->
+            <!-- End .modal -->
+
+            <!-- Plugins JS File -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/jquery.hoverIntent.min.js"></script>
+            <script src="assets/js/jquery.waypoints.min.js"></script>
+            <script src="assets/js/superfish.min.js"></script>
+            <script src="assets/js/owl.carousel.min.js"></script>
+            <!-- Main JS File -->
+            <script src="assets/js/main.js"></script>
+            </body>
+
+
+            <!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
+
+            </html>

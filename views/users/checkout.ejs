@@ -1,0 +1,274 @@
+<%- include('../partials/userHeader',{count:count, totalprice:totalprice}) %>
+
+    <!-- End .header -->
+
+    <main class="main">
+        <div class="page-header text-center"
+            style="background-image: url('https://images.hdqwalls.com/download/blur-background-6z-1920x1080.jpg')">
+            <div class="container">
+                <h1 class="page-title mt-1">Checkout<span>Shop</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+
+
+        <div>
+            <% if(message.length> 0) { %>
+                <%= message %>
+                    <%}%>
+        </div>
+
+
+
+        <div class="page-content">
+            <div class="checkout">
+                <div class="container">
+
+
+                    <div class="cart-discount">
+                        <form action="/apply-coupon" method="post">
+                            <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here
+                                    to enter your code</span></label>
+                            <input type="text" class="form-control" name="couponcode" placeholder="Click Here" required
+                                id="checkout-discount-input">
+                            <button class="btn btn-outline-primary-2" type="submit"><i
+                                    class="icon-long-arrow-right"></i>Apply Coupon&nbsp;&nbsp;&nbsp;</button>
+                        </form>
+
+                    </div><!-- End .checkout-discount -->
+                    <form action="/place-order" method="post">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Name *</label>
+                                        <input value="<%=fullorder.firstname%>" type="text" name="orderName" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <!-- <div class="col-sm-6">
+                                        <label>Last Name *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div> -->
+                                </div>
+
+                                <label>Company Name (Optional)</label>
+                                <input value="<%=fullorder.CompanyName%>" type="text" name="ordercompanyName" class="form-control">
+
+                                <label>Country *</label>
+                                <input value="<%=fullorder.Country%>" type="text" name="orderCountry" class="form-control" required>
+
+                                <label>Street address *</label>
+                                <input value="<%=fullorder.StreetAddress%>" type="text" name="orderStreetAddress" class="form-control"
+                                    placeholder="House number and Street name" required>
+                                <input value="<%=fullorder.Apartment%>" type="text" name="appartment" class="form-control"
+                                    placeholder="Appartments, suite, unit etc ..." required>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Town / City *</label>
+                                        <input value="<%=fullorder.City%>" type="text" name="orderCity" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>State *</label>
+                                        <input value="<%=fullorder.State%>" type="text" name="orderState" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Postcode / ZIP *</label>
+                                        <input value="<%=fullorder.postcode%>" type="text" name="orderZip" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>Mobile *</label>
+                                        <input value="<%=fullorder.mobileno%>" type="tel" name="orderPhone" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+
+                                <label>Email address *</label>
+                                <input value="<%=fullorder.email%>" type="email" name="orderEmail" class="form-control" required>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
+                                    <label class="custom-control-label" for="checkout-create-acc">Create an
+                                        account?</label>
+                                </div><!-- End .custom-checkbox -->
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
+                                    <label class="custom-control-label" for="checkout-diff-address">Ship to a different
+                                        address?</label>
+                                </div><!-- End .custom-checkbox -->
+
+                                <label>Order notes (optional)</label>
+                                <textarea class="form-control" cols="30" name="orderNote" rows="4"
+                                    placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                            </div><!-- End .col-lg-9 -->
+                            <aside class="col-lg-3">
+                                <div class="summary">
+                                    <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                    <table class="table table-summary">
+                                        <!-- <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead> -->
+
+                                        <tbody>
+
+                                            <!-- End .summary-subtotal -->
+                                            <tr>
+                                                <td>Shipping:</td>
+                                                <td>Free shipping</td>
+                                            </tr>
+                                            <tr class="summary-subtotal">
+                                                <td>Coupon applied:</td>
+                                                <%if(coupon !=''){%>
+                                                    <td class="summary-total">
+                                                        <%=coupon%>
+                                                    </td>
+                                                    <% }else{%>
+                                                        <td>None</td>
+                                                        <%}%>
+
+
+                                            </tr>
+                                            <tr class="summary-subtotal">
+                                                <td>Discount added:</td>
+                                                <%if(coupondisc != ''){%>
+                                                <td><%=coupondisc%>%</td>
+                                                <% }else{%>
+                                                    <td>None</td>
+                                                    <%}%>
+                                            </tr>
+                                            <tr class="summary-total">
+                                                <td>Total:</td>
+                                                <td>
+                                                    <%=totalPrice%>
+                                                </td>
+                                            </tr><!-- End .summary-total -->
+                                        </tbody>
+                                    </table><!-- End .table table-summary -->
+
+                                    <div class="accordion-summary" id="accordion-payment">
+                                        <!-- End .card -->
+
+                                        <!-- End .card -->
+
+                                        <div class="card">
+                                            <div class="card-header" id="heading-3">
+                                                <h2 class="card-title">
+                                                    <input class="collapsed" type="radio" name="payment" value="COD"
+                                                        data-toggle="collapse" href="#collapse-3" aria-expanded="false"
+                                                        aria-controls="collapse-3">
+                                                    Cash on delivery
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor
+                                                    sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat
+                                                    mattis eros.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+
+                                        <div class="card">
+                                            <div class="card-header" id="heading-4">
+                                                <h2 class="card-title">
+                                                    <input class="collapsed" type="radio" name="payment" value="payPal"
+                                                        data-toggle="collapse" href="#collapse-4" aria-expanded="false"
+                                                        aria-controls="collapse-4">
+                                                    PayPal <small class="float-right paypal-link">What is
+                                                        PayPal?</small>
+
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body">
+                                                    Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
+                                                    semper suscipit, posuere a, pede. Donec nec justo eget felis
+                                                    facilisis fermentum.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+
+                                        <div class="card">
+                                            <div class="card-header" id="heading-5">
+                                                <h2 class="card-title">
+                                                    <input class="collapsed" name="payment" value="razorPay"
+                                                        type="radio" data-toggle="collapse" href="#collapse-5"
+                                                        aria-expanded="false" aria-controls="collapse-5">
+                                                    Razor Pay
+                                                    <img src="assets/images/payments-summary.png" alt="payments cards">
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-5" class="collapse" aria-labelledby="heading-5"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body"> Donec nec justo eget felis facilisis
+                                                    fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                    Donec odio. Quisque volutpat mattis eros. Lorem ipsum dolor sit ame.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+                                    </div><!-- End .accordion -->
+
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <span class="btn-text">Place Order</span>
+                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                    </button>
+                                </div><!-- End .summary -->
+                            </aside><!-- End .col-lg-3 -->
+                        </div><!-- End .row -->
+                    </form>
+                </div><!-- End .container -->
+            </div><!-- End .checkout -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    <%- include('../partials/footer') %>
+        <!-- End .footer -->
+        </div><!-- End .page-wrapper -->
+        <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+        <%- include('../partials/mobileView') %>
+            <!-- End .mobile-menu-container -->
+
+            <!-- Sign in / Register Modal -->
+            <!-- End .modal -->
+
+            <!-- Plugins JS File -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/jquery.hoverIntent.min.js"></script>
+            <script src="assets/js/jquery.waypoints.min.js"></script>
+            <script src="assets/js/superfish.min.js"></script>
+            <script src="assets/js/owl.carousel.min.js"></script>
+            <!-- Main JS File -->
+            <script src="assets/js/main.js"></script>
+            </body>
+
+
+            <!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
+
+            </html>
