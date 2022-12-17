@@ -614,7 +614,7 @@ const selectcatagory = async (req, res) => {
 }
 }else{
     res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
-}
+}}
 
 
 
