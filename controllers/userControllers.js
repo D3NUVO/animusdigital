@@ -603,7 +603,17 @@ const productStore = async (req, res) => {
 const selectcatagory = async (req, res) => {
     const productData = await Product.find({ productCatagory: req.body.cat })
     const categories = await Category.find({})
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId })
+    if (req.session.userId) {
+        const userCart = await Cart.findOne({ userID: req.session.userId })
+        if (userCart) {
+            const userCart = await Cart.findOne({ userID: req.session.userId })
+            const count = userCart.cartProduct.length
+    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: count, totalprice: '' })
+}else{
+    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
+}
+}else{
+    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
 }
 
 
