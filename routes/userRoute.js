@@ -54,7 +54,7 @@ userRoute.post('/order-details', userController.orderDetails)
 
 userRoute.get('/wish-list', userController.wishlist)
 
-userRoute.get('/add-wishlist', userController.addwishlist)
+userRoute.get('/add-wishlist', userController.isLoggedIn,userController.addwishlist)
 
 userRoute.post('/apply-coupon',userController.isLoggedIn, userController.applyCoupon)
 
