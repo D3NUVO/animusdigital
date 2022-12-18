@@ -608,13 +608,14 @@ const selectcatagory = async (req, res) => {
         if (userCart) {
             const userCart = await Cart.findOne({ userID: req.session.userId })
             const count = userCart.cartProduct.length
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: count, totalprice: '' })
-}else{
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
+            res.render('product-store', { products: productData, Category: categories, userid: req.session.userId, count: count, totalprice: '' })
+        } else {
+            res.render('product-store', { products: productData, Category: categories, userid: req.session.userId, count: 0, totalprice: '' })
+        }
+    } else {
+        res.render('product-store', { products: productData, Category: categories, userid: req.session.userId, count: 0, totalprice: '' })
+    }
 }
-}else{
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
-}}
 
 
 
@@ -662,8 +663,8 @@ const placeOrder = async (req, res, next) => {
             totalPrice: req.session.totalPrice
 
         })
-            await order.save();
-            res.redirect('/to-payment')
+        await order.save();
+        res.redirect('/to-payment')
 
     } catch (error) {
         console.log(error);

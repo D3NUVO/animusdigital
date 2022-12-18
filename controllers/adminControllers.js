@@ -86,7 +86,7 @@ const adminDashboard = async (req, res) => {
         }
         console.log(categoryArray);
         console.log(catorderCount);
-        res.render('dashboard',{name:categoryArray, count:catorderCount})
+        res.render('dashboard', { name: categoryArray, count: catorderCount })
     }
     catch (error) {
         console.log(error.message);
