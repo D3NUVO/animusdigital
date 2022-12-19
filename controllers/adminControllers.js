@@ -43,7 +43,7 @@ const storage = multer.diskStorage({
 
 
 
-const upload = multer({ storage: storage }).single("productImage");
+const upload = multer({ storage: storage })
 
 
 
@@ -219,6 +219,12 @@ const adminBlockUser = async (req, res) => {
 
 const adminAddProductButton = async (req, res) => {
     try {
+        const files = req.files;
+        if(!files){
+            const error = new Error('Please choose file')
+            error.httpStatusCode = 400
+            return next(error)
+        }
         const product = Product({
             productName: req.body.productname,
             productPrice: req.body.productPrice,
@@ -227,7 +233,9 @@ const adminAddProductButton = async (req, res) => {
             productDiscription: req.body.productDiscription,
             productQuantity: req.body.productQuantity,
             productCatagory: req.body.productCatagory,
-            productImage: req.file.filename
+            productImage: req.files[0] && req.files[0].filename ? req.files[0].filename:"",
+            productImage2: req.files[1] && req.files[1].filename ? req.files[1].filename:"",
+            productImage3: req.files[2] && req.files[2].filename ? req.files[2].filename:""
         })
         console.log(product)
         const productData = await product.save();
@@ -262,7 +270,7 @@ const editProduct = async (req, res) => {
 const posteditProduct = async (req, res) => {
     try {
         console.log(req.body);
-        await Product.findByIdAndUpdate({ _id: req.query.id }, { $set: { productName: req.body.productName, productPrice: req.body.productPrice, productDiscription: req.body.productDiscription, productInfo: req.body.productInfo, productQuantity: req.body.productQuantity, productImage: req.file.filename } })
+        await Product.findByIdAndUpdate({ _id: req.query.id }, { $set: { productName: req.body.productName, productPrice: req.body.productPrice, productDiscription: req.body.productDiscription, productInfo: req.body.productInfo, productQuantity: req.body.productQuantity, productImage: req.files[0] && req.files[0].filename ? req.files[0].filename:"", productImage: req.files[1] && req.files[1].filename ? req.files[1].filename:"", productImage: req.files[2] && req.files[2].filename ? req.files[2].filename:"" } })
         res.redirect('/admin/products')
     } catch (error) {
         console.log(error.message);

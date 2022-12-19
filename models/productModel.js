@@ -34,6 +34,14 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    productImage2: {
+        type: String,
+        required: true
+    },
+    productImage3: {
+        type: String,
+        required: true
+    },
     isDeleted: {
         type: Number,
         default: 0

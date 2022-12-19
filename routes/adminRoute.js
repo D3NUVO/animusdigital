@@ -25,11 +25,11 @@ adminRoute.get('/products', adminController.isLoggedIn, adminController.adminPro
 
 adminRoute.get('/block-user', adminController.isLoggedIn, adminController.adminBlockUser)
 
-adminRoute.post('/add-product', adminController.isLoggedIn,adminController.upload,adminController.adminAddProductButton)
+adminRoute.post('/add-product', adminController.isLoggedIn,adminController.upload.any(),adminController.adminAddProductButton)
 
 adminRoute.get('/edit-product', adminController.isLoggedIn, adminController.editProduct)
 
-adminRoute.post('/posteditproduct', adminController.isLoggedIn, adminController.upload,adminController.posteditProduct)
+adminRoute.post('/posteditproduct', adminController.isLoggedIn, adminController.upload.any(),adminController.posteditProduct)
 
 adminRoute.get('/delete-product', adminController.isLoggedIn, adminController.productDelete)
 
