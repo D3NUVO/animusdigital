@@ -651,7 +651,7 @@ const checkout = async (req, res, next) => {
         // const totalPrice = fullcart.totalPrice
         const mathprice = fullcart.totalPrice
         req.session.totalPrice = Math.ceil(mathprice)
-        res.render('checkout', { message: '', subtotal:totalprice ,fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
+        res.render('checkout', { message: '', subtotal: totalprice, fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
 
     } catch (error) {
         if (error) {
@@ -685,13 +685,13 @@ const placeOrder = async (req, res, next) => {
         })
         await order.save();
         if (req.body.payment == 'payPal') {
-            res.render('paypal', { cart: '', totalPrice: req.session.totalPrice, order : fullcart, count: '', totalprice: '' })
+            res.render('paypal', { cart: '', totalPrice: req.session.totalPrice, order: fullcart, count: '', totalprice: '' })
         } else if (req.body.payment == 'COD') {
             const userCart = await Cart.findOne({ userID: req.session.userId })
             const count = userCart.cartProduct.length
             const del = await Cart.deleteMany({ userID: req.session.userId })
             await Order.findOneAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
-            res.render('orderSuccess',{count:count})
+            res.render('orderSuccess', { count: count })
         }
 
     } catch (error) {
@@ -782,7 +782,7 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
         const count = 0
         const order = await Order.findOneAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
 
-        res.render('orderSuccess',{count:count})
+        res.render('orderSuccess', { count: count })
 
     } catch (error) {
         console.log(error.message);
@@ -798,9 +798,9 @@ const orderDetails = async (req, res) => {
     if (userCart) {
         const count = userCart.cartProduct.length
         const totalprice = userCart.totalPrice
-        res.render('orderDetails', { order: fullorder.cartProduct, Tprice: fullorder, count: count, totalprice: totalprice });
+        res.render('orderDetails', {orderiinfo:fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: count, totalprice: totalprice });
     } else {
-        res.render('orderDetails', { order: fullorder.cartProduct, Tprice: fullorder, count: '', totalprice: '' });
+        res.render('orderDetails', {orderinfo:fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: '', totalprice: '' });
     }
 }
 
@@ -954,7 +954,7 @@ const applyCoupon = async (req, res, next) => {
                 const newtotalprice = totalprice - totalprice * (couponDiscount / 100)
                 req.session.totalPrice = Math.ceil(newtotalprice)
                 console.log(req.session);
-                res.render('checkout', { message: '', subtotal:totalprice, fullorder: fulluser, coupondisc: req.session.coupondisc, totalPrice: req.session.totalPrice, coupon: req.session.couponcode, count: count, totalprice: '' })
+                res.render('checkout', { message: '', subtotal: totalprice, fullorder: fulluser, coupondisc: req.session.coupondisc, totalPrice: req.session.totalPrice, coupon: req.session.couponcode, count: count, totalprice: '' })
             } else {
                 res.redirect('/check-out')
             }
