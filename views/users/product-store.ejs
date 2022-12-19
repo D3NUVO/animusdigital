@@ -38,6 +38,7 @@
                                         <label for="sortby">Sort by:</label>
                                         <div class="select-custom">
                                             <select name="cat" id="sortby" class="form-control">
+                                                <option value="ALL">ALL</option>
                                                 <% if(Category.length>0) { %>
                                                     <% for(let i=1;i<=Category.length;i++){ %>
                                                 <option value="<%=Category[i-1].category%>" ><%=Category[i-1].category%></option>
