@@ -14,8 +14,8 @@
                                     <!-- <i class="fas fa-envelope fa-lg fa-fw text-center"></i> -->
                                     <div class="form-outline flex-fill mb-0">
                                         <label class="text-center form-label" for="form3Example3c">Click Below to
-                                            Pay <br>Total:<%= order.totalPrice %></label>
-                                        <input type="hidden" id="total" value="<%= order.totalPrice %>">
+                                            Pay <br>Total:<%= totalPrice %></label>
+                                        <input type="hidden" id="total" value="<%= totalPrice %>">
                                     </div>
                                 </div>
 
@@ -64,7 +64,7 @@
                                                         const captureOrderHandler = (details) => {
                                                             const payerName = details.payer.name.given_name;
                                                             console.log('Transaction completed');
-                                                            window.location.replace("https://animusdigital.xyz/order-success?id=<%=order._id%>")
+                                                            window.location.replace("http://localhost:3000/order-success?id=<%=order._id%>")
                                                         };
 
                                                         return actions.order.capture().then(captureOrderHandler);

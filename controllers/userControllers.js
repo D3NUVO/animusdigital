@@ -601,20 +601,40 @@ const productStore = async (req, res) => {
 
 
 const selectcatagory = async (req, res) => {
-    const productData = await Product.find({ productCatagory: req.body.cat })
-    const categories = await Category.find({})
-    if (req.session.userId) {
-        const userCart = await Cart.findOne({ userID: req.session.userId })
-        if (userCart) {
+
+    if (req.body.cat == 'ALL') {
+        const productData = await Product.find({})
+        const categories = await Category.find({})
+        if (req.session.userId) {
             const userCart = await Cart.findOne({ userID: req.session.userId })
-            const count = userCart.cartProduct.length
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: count, totalprice: '' })
-}else{
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
+            if (userCart) {
+                const userCart = await Cart.findOne({ userID: req.session.userId })
+                const count = userCart.cartProduct.length
+                res.render('product-store', { products: productData, Category: categories, userid: req.session.userId, count: count, totalprice: '' })
+            } else {
+                res.render('product-store', { products: productData, Category: categories, userid: req.session.userId, count: 0, totalprice: '' })
+            }
+        } else {
+            res.render('product-store', { products: productData, Category: categories, userid: req.session.userId, count: 0, totalprice: '' })
+        }
+    } else {
+        const productDat = await Product.find({ productCatagory: req.body.cat })
+        const categories = await Category.find({})
+        if (req.session.userId) {
+            const userCart = await Cart.findOne({ userID: req.session.userId })
+            if (userCart) {
+                const userCart = await Cart.findOne({ userID: req.session.userId })
+                const count = userCart.cartProduct.length
+                res.render('product-store', { products: productDat, Category: categories, userid: req.session.userId, count: count, totalprice: '' })
+            } else {
+                res.render('product-store', { products: productDat, Category: categories, userid: req.session.userId, count: 0, totalprice: '' })
+            }
+        } else {
+            res.render('product-store', { products: productDat, Category: categories, userid: req.session.userId, count: 0, totalprice: '' })
+        }
+
+    }
 }
-}else{
-    res.render('product-store', { products: productData, Category: categories, userid: req.session.userId,count: 0, totalprice: '' })
-}}
 
 
 
@@ -629,8 +649,9 @@ const checkout = async (req, res, next) => {
         const totalprice = userCart.totalPrice
         const fullcart = await Cart.findOne({ userID: req.session.userId })
         // const totalPrice = fullcart.totalPrice
-        req.session.totalPrice = fullcart.totalPrice
-        res.render('checkout', { message: '', fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
+        const mathprice = fullcart.totalPrice
+        req.session.totalPrice = Math.ceil(mathprice)
+        res.render('checkout', { message: '', subtotal:totalprice ,fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
 
     } catch (error) {
         if (error) {
@@ -662,8 +683,16 @@ const placeOrder = async (req, res, next) => {
             totalPrice: req.session.totalPrice
 
         })
-            await order.save();
-            res.redirect('/to-payment')
+        await order.save();
+        if (req.body.payment == 'payPal') {
+            res.render('paypal', { cart: '', totalPrice: req.session.totalPrice, order : fullcart, count: '', totalprice: '' })
+        } else if (req.body.payment == 'COD') {
+            const userCart = await Cart.findOne({ userID: req.session.userId })
+            const count = userCart.cartProduct.length
+            const del = await Cart.deleteMany({ userID: req.session.userId })
+            await Order.findOneAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
+            res.render('orderSuccess',{count:count})
+        }
 
     } catch (error) {
         console.log(error);
@@ -702,6 +731,8 @@ const toPayment = async (req, res, next) => { //to get order id in payment COD
         console.log(error.message);
     }
 }
+
+
 
 
 const payment = async (req, res, next) => {
@@ -751,7 +782,7 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
         const count = 0
         const order = await Order.findOneAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
 
-        res.render('orderSuccess', { count: count, totalprice: totalprice })
+        res.render('orderSuccess',{count:count})
 
     } catch (error) {
         console.log(error.message);
@@ -921,9 +952,9 @@ const applyCoupon = async (req, res, next) => {
                 const totalprice = totalcart.totalPrice
                 console.log('Total price is here :', totalprice);
                 const newtotalprice = totalprice - totalprice * (couponDiscount / 100)
-                req.session.totalPrice = newtotalprice
+                req.session.totalPrice = Math.ceil(newtotalprice)
                 console.log(req.session);
-                res.render('checkout', { message: '', fullorder: fulluser, coupondisc: req.session.coupondisc, totalPrice: req.session.totalPrice, coupon: req.session.couponcode, count: count, totalprice: '' })
+                res.render('checkout', { message: '', subtotal:totalprice, fullorder: fulluser, coupondisc: req.session.coupondisc, totalPrice: req.session.totalPrice, coupon: req.session.couponcode, count: count, totalprice: '' })
             } else {
                 res.redirect('/check-out')
             }
