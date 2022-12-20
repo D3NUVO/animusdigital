@@ -125,7 +125,7 @@
                                             </div>
 
                                             <div class="d-flex justify-content-between">
-                                                <p class="text-muted mb-0">Invoice Date : <%= orderinfo.createdAt%></p>
+                                                <p class="text-muted mb-0">Invoice Date : <%= orderinfo.createdAt.toDateString()%></p>
                                                 <p class="text-muted mb-0"><span class="fw-bold me-4">Coupon Applied:&nbsp;</span> <b><%= orderinfo.couponCode%></b>
                                                 </p>
                                             </div>
