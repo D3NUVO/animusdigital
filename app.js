@@ -53,9 +53,9 @@ app.use('/', userRoute)
 
 app.use('/admin', adminRoute)
 
-app.use(function (req, res) {
-  res.status(404).redirect("/");
-});
+// app.use(function (req, res) {
+//   res.status(404).redirect("/");
+// });
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running...");

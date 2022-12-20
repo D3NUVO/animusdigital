@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const Product = require('../models/productModel')
 const Category = require('../models/categoryModel')
 const Coupon = require('../models/couponModel')
+const Cart = require('../models/cartModel')
 const Order = require('../models/orderModel')
 const session = require('express-session')
 const multer = require('multer');
@@ -86,7 +87,7 @@ const adminDashboard = async (req, res) => {
         }
         console.log(categoryArray);
         console.log(catorderCount);
-        res.render('dashboard',{name:categoryArray, count:catorderCount})
+        res.render('dashboard', { name: categoryArray, count: catorderCount })
     }
     catch (error) {
         console.log(error.message);
@@ -220,7 +221,7 @@ const adminBlockUser = async (req, res) => {
 const adminAddProductButton = async (req, res) => {
     try {
         const files = req.files;
-        if(!files){
+        if (!files) {
             const error = new Error('Please choose file')
             error.httpStatusCode = 400
             return next(error)
@@ -233,9 +234,9 @@ const adminAddProductButton = async (req, res) => {
             productDiscription: req.body.productDiscription,
             productQuantity: req.body.productQuantity,
             productCatagory: req.body.productCatagory,
-            productImage: req.files[0] && req.files[0].filename ? req.files[0].filename:"",
-            productImage2: req.files[1] && req.files[1].filename ? req.files[1].filename:"",
-            productImage3: req.files[2] && req.files[2].filename ? req.files[2].filename:""
+            productImage: req.files[0] && req.files[0].filename ? req.files[0].filename : "",
+            productImage2: req.files[1] && req.files[1].filename ? req.files[1].filename : "",
+            productImage3: req.files[2] && req.files[2].filename ? req.files[2].filename : ""
         })
         console.log(product)
         const productData = await product.save();
@@ -270,7 +271,7 @@ const editProduct = async (req, res) => {
 const posteditProduct = async (req, res) => {
     try {
         console.log(req.body);
-        await Product.findByIdAndUpdate({ _id: req.query.id }, { $set: { productName: req.body.productName, productPrice: req.body.productPrice, productDiscription: req.body.productDiscription, productInfo: req.body.productInfo, productQuantity: req.body.productQuantity, productImage: req.files[0] && req.files[0].filename ? req.files[0].filename:"", productImage: req.files[1] && req.files[1].filename ? req.files[1].filename:"", productImage: req.files[2] && req.files[2].filename ? req.files[2].filename:"" } })
+        await Product.findByIdAndUpdate({ _id: req.query.id }, { $set: { productName: req.body.productName, productPrice: req.body.productPrice, productDiscription: req.body.productDiscription, productInfo: req.body.productInfo, productQuantity: req.body.productQuantity, productImage: req.files[0] && req.files[0].filename ? req.files[0].filename : "", productImage: req.files[1] && req.files[1].filename ? req.files[1].filename : "", productImage: req.files[2] && req.files[2].filename ? req.files[2].filename : "" } })
         res.redirect('/admin/products')
     } catch (error) {
         console.log(error.message);
@@ -390,6 +391,23 @@ const cancelOrder = async (req, res, next) => {
 }
 
 
+
+const orderDetails = async (req, res) => {
+    const orderid = req.query.id
+    console.log('Query ID : ', orderid);
+    const fullorder = await Order.findById({ _id: orderid }).populate('cartProduct.productID userID')
+    const userid = fullorder.userID
+    const userCart = await Cart.findOne({ userID: userid })
+    if (userCart) {
+        const count = userCart.cartProduct.length
+        const totalprice = userCart.totalPrice
+        res.render('orderdetail', { orderinfo: fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: count, totalprice: totalprice });
+    } else {
+        res.render('orderdetail', { orderinfo: fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: '', totalprice: '' });
+    }
+}
+
+
 const adminLogout = async (req, res) => {
     try {
         // adminSession = req.session
@@ -427,6 +445,7 @@ module.exports = {
     addcoupon,
     delCoupon,
     upload,
+    orderDetails,
     isLoggedIn,
     isLoggedOut
 }

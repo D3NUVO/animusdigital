@@ -53,6 +53,8 @@ adminRoute.post('/add-coupon', adminController.addcoupon)
 
 adminRoute.post('/delete-coupon', adminController.delCoupon)
 
+adminRoute.post('/order-details', adminController.orderDetails)
+
 adminRoute.get('/logout', adminController.isLoggedIn, adminController.adminLogout)
 
 

@@ -798,7 +798,7 @@ const orderDetails = async (req, res) => {
     if (userCart) {
         const count = userCart.cartProduct.length
         const totalprice = userCart.totalPrice
-        res.render('orderDetails', {orderiinfo:fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: count, totalprice: totalprice });
+        res.render('orderDetails', {orderinfo:fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: count, totalprice: totalprice });
     } else {
         res.render('orderDetails', {orderinfo:fullorder, order: fullorder.cartProduct, Tprice: fullorder, count: '', totalprice: '' });
     }
@@ -971,9 +971,10 @@ const applyCoupon = async (req, res, next) => {
 }
 
 const editaddress = async (req, res, next) => {
-    const fulluser = await User.findOne({ userID: req.session.userId })
+    //const fulluser = await User.findOne({ userID: req.session.userId })
 
-    fulluser.firstname = req.body.firstname,
+        fulluser.userID = req.session.userId,
+        fulluser.firstname = req.body.firstname,
         fulluser.email = req.body.email,
         fulluser.mobileno = req.body.mobileno,
         fulluser.CompanyName = req.body.CompanyName,

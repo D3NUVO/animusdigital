@@ -78,7 +78,9 @@
                                                     <%= i %>
                                                 </th>
                                                 <td>
-                                                    <%= order[i-1]._id %>
+                                                    <form action="/admin/order-details?id=<%= order[i-1]._id %>" method="post">
+                                                        <button type="submit"><%= order[i-1]._id %></button>
+                                                    </form>
                                                 </td>
                                                 <td>
                                                     <%= order[i-1].orderEmail %>
