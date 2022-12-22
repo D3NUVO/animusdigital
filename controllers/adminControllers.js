@@ -6,10 +6,12 @@ const Category = require('../models/categoryModel')
 const Coupon = require('../models/couponModel')
 const Cart = require('../models/cartModel')
 const Order = require('../models/orderModel')
+const Banner = require('../models/bannerModel')
 const session = require('express-session')
 const multer = require('multer');
 const path = require('path')
 const { find, findOne, findByIdAndDelete } = require('../models/productModel')
+const { resolveSoa } = require('dns')
 
 let adminSession
 
@@ -367,8 +369,41 @@ const delCoupon = async (req, res, next) => {
     res.redirect('/admin/coupons')
 }
 
+
+const banner = async (req, res) => {
+    try {
+        const banner = await Banner.find()
+        res.render('bannerManage', { banner: banner })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+const addbanner = async (req, res) => {
+    try {
+        const cop = req.body.couponCode
+        const isExist = await Coupon.findOne({ couponCode: cop })
+        if (isExist == null && cop != '') {
+            const coupons = new Coupon({
+                couponCode: req.body.couponCode,
+                couponDiscount: req.body.couponDiscount
+            })
+            await coupons.save()
+            res.redirect('/admin/coupons')
+        } else {
+            console.log("Coupon Exists or Its is null");
+            res.redirect('/admin/coupons')
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+
 const orderManage = async (req, res, next) => {
-    const orderData = await Order.find()
+    const orderData = await Order.find().sort({createdAt:-1})
     res.render('orderManage', { order: orderData, products: '' })
 }
 
@@ -420,6 +455,13 @@ const adminLogout = async (req, res) => {
 }
 
 
+const salesreport = async(req,res) => {
+    const products  = await Product.find()
+    res.render('salesreport',{product:products})
+}
+
+
+
 
 module.exports = {
     adminDashboard,
@@ -444,6 +486,8 @@ module.exports = {
     coupon,
     addcoupon,
     delCoupon,
+    banner,
+    salesreport,
     upload,
     orderDetails,
     isLoggedIn,

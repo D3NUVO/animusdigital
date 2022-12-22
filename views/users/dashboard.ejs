@@ -40,12 +40,12 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address"
-                                        role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+                                        role="tab" aria-controls="tab-address" aria-selected="false">Addresses</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-editaddress-link" data-toggle="tab"
                                         href="#tab-editaddress" role="tab" aria-controls="tab-editaddress"
-                                        aria-selected="false">Edit Details</a>
+                                        aria-selected="false">Add Address</a>
                                 </li>
                                 <!-- <li class="nav-item">
                                     <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account"
@@ -63,7 +63,7 @@
                                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
                                     aria-labelledby="tab-dashboard-link">
                                     <p>Hello <span class="font-weight-normal text-dark">
-                                            <%=fullorder.firstname%>
+                                            <%=fulluser.firstname%>
                                         </span>
                                         <br>
                                         From your account dashboard you can view your <a href="#tab-orders"
@@ -154,86 +154,93 @@
 
                                 <div class="tab-pane fade" id="tab-address" role="tabpanel"
                                     aria-labelledby="tab-address-link">
-                                    <p>The following addresses will be used on the checkout page by default.</p>
+                                    <%if(fulladdress!=null){%>
+                                        <p>The following addresses can be used on the checkout page.</p>
 
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card card-dashboard">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Shipping Address</h3>
-                                                    <!-- End .card-title -->
+                                        <div class="row">
 
-                                                    <p>
-                                                        <%=fullorder.firstname%><br>
-                                                            <%=fullorder.email%><br>
-                                                                <%=fullorder.mobileno%><br>
-                                                                    <%=fullorder.Apartment%><br>
-                                                                        <%=fullorder.StreetAddress%><br>
-                                                                            <%=fullorder.City%>,<%=fullorder.State%><br>
-                                                                                    <%=fullorder.postcode%><br>
-                                                                                        <%=fullorder.Country%><br>
+                                            <%for(let key of fulladdress){%>
+                                                <div class="col-lg-6">
+                                                    <div class="card card-dashboard">
 
-                                                    </p>
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .card-dashboard -->
-                                        </div><!-- End .col-lg-6 -->
+                                                        <div class="card-body">
+                                                            <h3 class="card-title">Shipping Address</h3>
+                                                            <!-- End .card-title -->
 
-                                        <!-- End .card-dashboard -->
-                                    </div><!-- End .col-lg-6 -->
+                                                            <p>
+                                                                <%=key.firstname%><br>
+                                                                    <%=key.email%><br>
+                                                                        <%=key.mobileno%><br>
+                                                                            <%=key.Apartment%><br>
+                                                                                <%=key.StreetAddress%><br>
+                                                                                    <%=key.City%>,
+                                                                                        <%=key.State%><br>
+                                                                                            <%=key.postcode%>
+                                                                                                <br>
+                                                                                                <%=key.Country%>
+                                                                                                    <br>
+
+                                                            </p>
+
+
+                                                            <form action="/delete-address?id=<%=key._id%>" method="post">
+                                                                <button type="submit">delete</button>
+                                                            </form>
+                                                        </div><!-- End .card-body -->
+                                                    </div><!-- End .card-dashboard -->
+                                                </div>
+                                                <%}%><!-- End .col-lg-6 -->
+
+                                                <!-- End .card-dashboard -->
+
+                                        </div>
+                                        <%}else{%>
+                                            <p>No Address Found in database</p>
+                                            <%}%><!-- End .col-lg-6 -->
                                 </div><!-- End .row -->
 
 
 
                                 <div class="tab-pane fade" id="tab-editaddress" role="tabpanel"
                                     aria-labelledby="tab-editaddress-link">
-                                    <form action="/editaddress" method="post">
+                                    <form action="/addaddress" method="post">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label>Name *</label>
-                                                <input name="firstname" value="<%=fullorder.firstname%>" type="text"
-                                                    class="form-control" required>
+                                                <input name="firstname" type="text" class="form-control" required>
                                             </div><!-- End .col-sm-6 -->
 
                                             <div class="col-sm-6">
                                                 <label>Company Name </label>
-                                                <input name="CompanyName" value="<%=fullorder.CompanyName%>" type="text"
-                                                    class="form-control">
+                                                <input name="CompanyName" type="text" class="form-control">
                                             </div><!-- End .col-sm-6 -->
                                         </div><!-- End .row -->
 
                                         <label>Country *</label>
-                                        <input name="Country" value="<%=fullorder.Country%>" type="text"
-                                            class="form-control" required>
+                                        <input name="Country" type="text" class="form-control" required>
 
                                         <label>Street address *</label>
-                                        <input name="StreetAddress" value="<%=fullorder.StreetAddress%>" type="text"
-                                            class="form-control" required>
+                                        <input name="StreetAddress" type="text" class="form-control" required>
                                         <label>Apartment </label>
-                                        <input name="Apartment" value="<%=fullorder.Apartment%>" type="text"
-                                            class="form-control">
+                                        <input name="Apartment" type="text" class="form-control">
 
                                         <label>Town/City</label>
-                                        <input name="City" value="<%=fullorder.City%>" type="text" class="form-control"
-                                            required>
+                                        <input name="City" type="text" class="form-control" required>
 
                                         <label>State</label>
-                                        <input name="State" value="<%=fullorder.State%>" type="text"
-                                            class="form-control" required>
+                                        <input name="State" type="text" class="form-control" required>
 
                                         <label>Postcode/ZIP</label>
-                                        <input name="postcode" value="<%=fullorder.postcode%>" type="tel"
-                                            class="form-control mb-2" required>
+                                        <input name="postcode" type="tel" class="form-control mb-2" required>
 
                                         <label>Mobile</label>
-                                        <input name="mobileno" value="<%=fullorder.mobileno%>" type="text"
-                                            class="form-control mb-2" required>
+                                        <input name="mobileno" type="text" class="form-control mb-2" required>
 
                                         <label>Email address</label>
-                                        <input name="email" value="<%=fullorder.email%>" type="email"
-                                            class="form-control mb-2" required>
+                                        <input name="email" type="email" class="form-control mb-2" required>
 
                                         <button type="submit" class="btn btn-outline-primary-2">
-                                            <span>SAVE CHANGES</span>
+                                            <span>ADD</span>
                                             <i class="icon-long-arrow-right"></i>
                                         </button>
                                     </form>

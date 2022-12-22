@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="img/titleicon1.png" rel="icon">
+    <title>WoodPecker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script  src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+</head>
+<body>     
+    <div class="container mt-5">
+      <h3 class="align-items-center justify-content-center ">SALES REPORT</h3>
+      <form action="/admin" method="get">
+        <button type="submit">Go Back</button>
+      </form>
+    <table id="myTable" class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Quantity Sold</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%for(let i=1;i<=product.length;i++){%>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                
+                <img
+                    src="./productImages/<%= product[i-1].productImage %>"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    />
+                    
+                <div class="ms-3">
+                  <p class="fw-bold mb-1 ml-3"><%= product[i-1].productName %></p>
+                  <p class="text-muted mb-0 ml-3">Price: ₹<%= product[i-1].productPrice %></p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1"><%= product[i-1].pcat %></p>
+              <p class="text-muted mb-0">Quantity:<%= product[i-1].productQuantity
+                 %></p>
+            </td>
+            <td>
+                <div>
+                    <p class="text-muted mb-0"><%= product[i-1].qty %></p>
+                </div>
+            </td>
+            <td>
+                <p class="text-muted mb-0 ml-3">₹<%= product[i-1].productPrice*product[i-1].qty %></p>
+            </td>
+            
+          </tr>
+          <%}%>
+          
+        </tbody>
+      </table>
+      </div>
+      <script>
+        $(document).ready(function() {
+        $('#myTable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } )
+        </script>
+
+</body>
+</html>

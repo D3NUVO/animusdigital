@@ -44,10 +44,6 @@ userRoute.get('/check-out',userController.isLoggedIn, userController.checkout) /
 
 userRoute.post('/place-order',userController.isLoggedIn, userController.placeOrder)//to mongodb
 
-userRoute.get('/to-payment',userController.isLoggedIn, userController.toPayment)
-
-userRoute.post('/payment', userController.isLoggedIn, userController.payment)
-
 userRoute.get('/order-success', userController.isLoggedIn, userController.orderSuccess)
 
 userRoute.post('/order-details', userController.orderDetails)
@@ -58,7 +54,11 @@ userRoute.get('/add-wishlist', userController.addwishlist)
 
 userRoute.post('/apply-coupon',userController.isLoggedIn, userController.applyCoupon)
 
-userRoute.post('/editaddress',userController.isLoggedIn, userController.editaddress)
+userRoute.post('/addaddress',userController.isLoggedIn, userController.Addaddress)
+
+userRoute.post('/delete-address',userController.isLoggedIn, userController.deleteaddress)
+
+userRoute.post('/select-address',userController.isLoggedIn, userController.selectaddress)
 
 userRoute.get('/logout', userController.userLogout)
 

@@ -16,34 +16,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         require:true
     },
-    CompanyName: {
-        type: String,
-        default : ''
-    },
-    Country: {
-        type: String,
-        default: ''
-    },
-    StreetAddress: {
-        type: String,
-        default: ''
-    },
-    Apartment: {
-        type: String,
-        default: ''
-    },
-    City: {
-        type: String,
-        default: ''
-    },
-    State: {
-        type: String,
-        default: ''
-    },
-    postcode: {
-        type: String,
-        default: ''
-    },
+    
     isAdmin: {
         type: Number,
         default: 0

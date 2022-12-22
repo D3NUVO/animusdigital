@@ -3,7 +3,6 @@ const addressSchema = new mongoose.Schema({
 
     userID: {
         type: mongoose.Types.ObjectId,
-        ref:'User'
     },
 
     firstname: {

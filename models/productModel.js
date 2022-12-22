@@ -32,19 +32,23 @@ const productSchema = new mongoose.Schema({
     },
     productImage: {
         type: String,
-        required: true
+
     },
     productImage2: {
         type: String,
-        required: true
+
     },
     productImage3: {
         type: String,
-        required: true
+
     },
     isDeleted: {
         type: Number,
         default: 0
+    },
+    qty: {
+        type: Number,
+        default:0
     },
     uploadedAt:{
         type:Date,

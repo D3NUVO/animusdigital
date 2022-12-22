@@ -35,9 +35,7 @@
                                                                     <th>Product</th>
                                                                     <th>Price</th>
                                                                     <th>Quantity</th>
-                                                                    <th></th>
                                                                     <th>Total</th>
-                                                                    <th></th>
                                                                 </tr>
                                                             </thead>
 
@@ -76,16 +74,20 @@
 
                                                                             <div
                                                                                 class="input-group w-auto justify-content-end align-items-center">
-                                                                                <form action="/update-qty?id=<%= cartProducts[i-1]._id %>" method="post">
+                                                                                <form
+                                                                                    action="/update-qty?id=<%= cartProducts[i-1]._id %>"
+                                                                                    method="post">
                                                                                     <button data-increase type="submit"
-                                                                                    class="button-minus border rounded-circle  icon-shape icon-sm mx-1 "
-                                                                                    data-field="quantity">+</button>
-                                                                                <input data-value type="number" min="1" step="1"
-                                                                                    max="10" value="<%=cartProducts[i-1].qty%>" name="qnty"
-                                                                                    class="quantity-field border-0 text-center w-25">
-                                                                                <button data-decrease type="submit"
-                                                                                    class="button-plus border rounded-circle icon-shape icon-sm "
-                                                                                    data-field="quantity">-</button>
+                                                                                        class="button-minus border rounded-circle  icon-shape icon-sm mx-1 "
+                                                                                        data-field="quantity">+</button>
+                                                                                    <input data-value type="number"
+                                                                                        min="1" step="1" max="10"
+                                                                                        value="<%=cartProducts[i-1].qty%>"
+                                                                                        name="qnty"
+                                                                                        class="quantity-field border-0 text-center w-25">
+                                                                                    <button data-decrease type="submit"
+                                                                                        class="button-plus border rounded-circle icon-shape icon-sm "
+                                                                                        data-field="quantity">-</button>
                                                                                 </form>
                                                                             </div>
 
@@ -225,6 +227,48 @@
                                     }
                                 }
                             </script>
+
+
+
+                            <script>
+                                function addToCart(productId) {
+                                    $.ajax({
+                                        url: '/cart?id=' + productId,
+                                        method: 'POST',
+                                        success: function (response) {
+                                            if (response.status) {
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'success',
+                                                    title: 'Product is added to the cart',
+                                                    showConfirmButton: false,
+                                                    timer: 1500,
+                                                });
+                                                let count = $('#cart-count').html();
+                                                count = parseInt(count) + 1;
+                                                $('#cart-count').html(count);
+                                            } else {
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'error',
+                                                    title: 'Please login',
+                                                    showConfirmButton: false,
+                                                    timer: 1500,
+                                                });
+                                                let count = $('#cart-count').html();
+                                                count = parseInt(count) + 1;
+                                                $('#cart-count').html(count);
+                                            }
+                                        },
+                                    });
+                                }
+                            </script>
+
+
+
+
+
+
                             </body>
 
 

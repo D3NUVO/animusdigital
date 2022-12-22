@@ -85,12 +85,11 @@
                                                         
                                                     </div><!-- End .product-action-vertical -->
 
-                                                    <form action="/add-cart?id=<%= products[i-1]._id %>" method="post">
                                                         <div class="product-action">
-                                                            <button class="btn-product btn-cart"><span>add to
+                                                            <button onclick="addCart('<%= products[i-1]._id %>')" class="btn-product btn-cart"><span>add to
                                                                     cart</span></button>
                                                         </div>
-                                                    </form><!-- End .product-action -->
+<!-- End .product-action -->
                                                 </figure><!-- End .product-media -->
 
                                                 <div class="product-body">
@@ -185,6 +184,41 @@
             <script src="assets/js/nouislider.min.js"></script>
             <!-- Main JS File -->
             <script src="assets/js/main.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+            <script>
+                function addCart(productId) {
+                    $.ajax({
+                        url: '/add-cart?id=' + productId,
+                        method: 'POST',
+                        success: function (response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Product is added to the cart',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                                let count = $('#cart-count').html();
+                                count = parseInt(count) + 1;
+                                $('#cart-count').html(count);
+                            } else {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Please login',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                                let count = $('#cart-count').html();
+                                count = parseInt(count) + 1;
+                                $('#cart-count').html(count);
+                            }
+                        },
+                    });
+                }
+            </script>
             </body>
 
 

@@ -41,7 +41,7 @@
 
 
                                             <% if(order.length > 0){ %>
-                                                <% for(let i=1; i<order.length; i++){ %>
+                                                <% for(let key of order){ %>
 
                                                 
 
@@ -49,8 +49,8 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-2">
-                                                            <% if(order[i-1].productID.productImage) { %>
-                                                                <img src="./productImages/<%= order[i-1].productID.productImage %>"
+                                                            <% if(key.productID.productImage) { %>
+                                                                <img src="./productImages/<%= key.productID.productImage %>"
                                                                     width="100vw" height="100vh" class="img-fluid" alt="Phone">
                                                                 <% }else{ %>
                                                                     Image Not Found
@@ -59,23 +59,23 @@
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0"><%= order[i-1].productID.productName %></p>
+                                                            <p class="text-muted mb-0"><%= key.productID.productName %></p>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Catagery<br><%= order[i-1].productID.productCatagory %></p>
+                                                            <p class="text-muted mb-0 small">Catagery<br><%= key.productID.productCatagory %></p>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Rate:<%= order[i-1].productID.productPrice %></p>
+                                                            <p class="text-muted mb-0 small">Rate:<%= key.productID.productPrice %></p>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small">Qty:<%= order[i-1].qty %></p>
+                                                            <p class="text-muted mb-0 small">Qty:<%= key.qty %></p>
                                                         </div>
                                                         <div
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p class="text-muted mb-0 small"><%= order[i-1].productID.productPrice * order[i-1].qty %></p>
+                                                            <p class="text-muted mb-0 small"><%= key.productID.productPrice * key.qty %></p>
                                                         </div>
                                                     </div>
                                                     <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">

@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Name *</label>
-                                        <input value="<%=fullorder.firstname%>" type="text" name="orderName" class="form-control" required>
+                                        <input value="<%=seladdress.firstname%>" type="text" name="orderName" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <!-- <div class="col-sm-6">
@@ -62,43 +62,43 @@
                                 </div>
 
                                 <label>Company Name (Optional)</label>
-                                <input value="<%=fullorder.CompanyName%>" type="text" name="ordercompanyName" class="form-control">
+                                <input value="<%=seladdress.CompanyName%>" type="text" name="ordercompanyName" class="form-control">
 
                                 <label>Country *</label>
-                                <input value="<%=fullorder.Country%>" type="text" name="orderCountry" class="form-control" required>
+                                <input value="<%=seladdress.Country%>" type="text" name="orderCountry" class="form-control" required>
 
                                 <label>Street address *</label>
-                                <input value="<%=fullorder.StreetAddress%>" type="text" name="orderStreetAddress" class="form-control"
+                                <input value="<%=seladdress.StreetAddress%>" type="text" name="orderStreetAddress" class="form-control"
                                     placeholder="House number and Street name" required>
-                                <input value="<%=fullorder.Apartment%>" type="text" name="appartment" class="form-control"
+                                <input value="<%=seladdress.Apartment%>" type="text" name="appartment" class="form-control"
                                     placeholder="Appartments, suite, unit etc ..." required>
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Town / City *</label>
-                                        <input value="<%=fullorder.City%>" type="text" name="orderCity" class="form-control" required>
+                                        <input value="<%=seladdress.City%>" type="text" name="orderCity" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>State *</label>
-                                        <input value="<%=fullorder.State%>" type="text" name="orderState" class="form-control" required>
+                                        <input value="<%=seladdress.State%>" type="text" name="orderState" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Postcode / ZIP *</label>
-                                        <input value="<%=fullorder.postcode%>" type="tel" name="orderZip" class="form-control" required>
+                                        <input value="<%=seladdress.postcode%>" type="tel" name="orderZip" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>Mobile *</label>
-                                        <input value="<%=fullorder.mobileno%>" type="tel" name="orderPhone" class="form-control" required>
+                                        <input value="<%=seladdress.mobileno%>" type="tel" name="orderPhone" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <label>Email address *</label>
-                                <input value="<%=fullorder.email%>" type="email" name="orderEmail" class="form-control" required>
+                                <input value="<%=seladdress.email%>" type="email" name="orderEmail" class="form-control" required>
 
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
@@ -116,6 +116,8 @@
                                 <textarea class="form-control" cols="30" name="orderNote" rows="4"
                                     placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                             </div><!-- End .col-lg-9 -->
+
+
                             <aside class="col-lg-3">
                                 <div class="summary">
                                     <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
@@ -239,9 +241,66 @@
                                         <span class="btn-hover-text">Proceed to Checkout</span>
                                     </button>
                                 </div><!-- End .summary -->
-                            </aside><!-- End .col-lg-3 -->
+                            </aside> 
+                            <!-- End .col-lg-3 -->
                         </div><!-- End .row -->
                     </form>
+
+
+
+
+
+                    <div>
+                        <%if(fulladdress!=null){%>
+                            <div>
+                                <h6>Select any address.</h6>
+                            </div>
+
+                            <div class="row">
+
+                                <%for(let key of fulladdress){%>
+                                    <div class="col-lg-3 col-sm-12 col-md-6">
+                                        <div class="card card-dashboard">
+
+                                            <div class="card-body">
+                                                <h3 class="card-title"></h3>
+                                                <!-- End .card-title -->
+
+                                                <p>
+                                                    <%=key.firstname%><br>
+                                                        <%=key.email%><br>
+                                                            <%=key.mobileno%><br>
+                                                                <%=key.Apartment%><br>
+                                                                    <%=key.StreetAddress%><br>
+                                                                        <%=key.City%>,
+                                                                            <%=key.State%><br>
+                                                                                <%=key.postcode%>
+                                                                                    <br>
+                                                                                    <%=key.Country%>
+                                                                                        <br>
+
+                                                </p>
+
+
+                                                <div class="row">
+                                                    <form action="/select-address?id=<%=key._id%>" method="post">
+                                                        <button type="submit">Select</button>
+                                                    </form>
+                                                </div>
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .card-dashboard -->
+                                    </div>
+                                    <%}%>
+                                    <!-- End .col-lg-6 -->
+
+                                    <!-- End .card-dashboard -->
+                            </div>
+                            <%}else{%>
+                                <p>No Address Found in database</p>
+                                <%}%>
+                    </div>
+                        
+            
                 </div><!-- End .container -->
             </div><!-- End .checkout -->
         </div><!-- End .page-content -->

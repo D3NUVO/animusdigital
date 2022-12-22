@@ -49,11 +49,15 @@ adminRoute.post('/delete-category', adminController.delCategory)
 
 adminRoute.get('/coupons', adminController.coupon)
 
+adminRoute.get('/banner', adminController.banner)
+
 adminRoute.post('/add-coupon', adminController.addcoupon)
 
 adminRoute.post('/delete-coupon', adminController.delCoupon)
 
 adminRoute.post('/order-details', adminController.orderDetails)
+
+adminRoute.get('/sales-report', adminController.salesreport)
 
 adminRoute.get('/logout', adminController.isLoggedIn, adminController.adminLogout)
 
