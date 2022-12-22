@@ -55,7 +55,7 @@
                                         <h5 class="card-subtitle">Overview of Popular Catagory</h5>
                                     </div>
                                     <div class="ms-auto d-flex no-block align-items-center">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -94,6 +94,60 @@
                         </div>
                     </div>
 
+
+
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div>
+                                        <h4 class="card-title">Sales Summary</h4>
+                                        <h5 class="card-subtitle">Overview of Popular Catagory</h5>
+                                    </div>
+                                    <div class="ms-auto d-flex no-block align-items-center">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- column -->
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <div>
+                                                <canvas id="myCharts"></canvas>
+                                            </div>
+
+                                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                            <script>
+                                                const ctx = document.getElementById('myCharts');
+
+                                                new Chart(ctx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                                        datasets: [{
+                                                            label: '# of Votes',
+                                                            data: [12, 19, 3, 5, 2, 3],
+                                                            borderWidth: 1
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        scales: {
+                                                            y: {
+                                                                beginAtZero: true
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <!-- column -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
@@ -101,7 +155,7 @@
                 <!-- ============================================================== -->
                 <!-- Table -->
                 <!-- ============================================================== -->
-                
+
                 <!-- ============================================================== -->
                 <!-- Table -->
                 <!-- ============================================================== -->

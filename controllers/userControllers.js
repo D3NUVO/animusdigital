@@ -281,10 +281,10 @@ const cart = async (req, res) => {
                     }
 
                 } else {
-                    res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: '', count: 0, totalprice: '' })
+                    res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: 0, count: 0, totalprice: '' })
                 }
             } else {// cartProduct error else
-                res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: '', count: 0, totalprice: '' })
+                res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: 0, count: 0, totalprice: '' })
             }
 
 
@@ -316,10 +316,10 @@ const cart = async (req, res) => {
                     }
 
                 } else {
-                    res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: '', count: 0, totalprice: '' })
+                    res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: 0, count: 0, totalprice: '' })
                 }
             } else {
-                res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: '', count: 0, totalprice: '' })
+                res.render('cart', { userid: req.session.userId, cartProducts: '', totalPrice: 0, count: 0, totalprice: '' })
             }
 
         }
@@ -373,7 +373,8 @@ const updateQuantity = async (req, res, next) => {
         productData.cartProduct[productIndex].qty = req.body.qnty
         await productData.save()
 
-        res.redirect('/cart')
+        //res.redirect('/cart')
+        res.json({status:true})
     } catch (error) {
         console.log(error.message);
     }
@@ -606,7 +607,7 @@ const productStore = async (req, res) => {
 const selectcatagory = async (req, res) => {
 
     if (req.body.cat == 'ALL') {
-        const productData = await Product.find({})
+        const productData = await Product.find({isDeleted: 0})
         const categories = await Category.find({})
         if (req.session.userId) {
             const userCart = await Cart.findOne({ userID: req.session.userId })
@@ -654,7 +655,7 @@ const checkout = async (req, res, next) => {
         const totalprice = userCart.totalPrice
         const fullcart = await Cart.findOne({ userID: req.session.userId })
         // const totalPrice = fullcart.totalPrice
-        const mathprice = fullcart.totalPrice
+        const mathprice = fullcart.totalPrice*85
         req.session.totalPrice = Math.ceil(mathprice)
         res.render('checkout', { message: '',seladdress:seladdress,fulladdress:fulladdress, subtotal: totalprice, fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
 
@@ -907,7 +908,7 @@ const applyCoupon = async (req, res, next) => {
                 const totalprice = totalcart.totalPrice
                 console.log('Total price is here :', totalprice);
                 const newtotalprice = totalprice - totalprice * (couponDiscount / 100)
-                req.session.totalPrice = Math.ceil(newtotalprice)
+                req.session.totalPrice = Math.ceil(newtotalprice*85)
                 console.log(req.session);
                 res.render('checkout', { message: '',seladdress:'', fulladdress:fulladdress, subtotal: totalprice, fullorder: fulluser, coupondisc: req.session.coupondisc, totalPrice: req.session.totalPrice, coupon: req.session.couponcode, count: count, totalprice: '' })
             } else {
@@ -971,7 +972,7 @@ const selectaddress = async (req, res, next) => {
         const totalprice = userCart.totalPrice
         const fullcart = await Cart.findOne({ userID: req.session.userId })
         // const totalPrice = fullcart.totalPrice
-        const mathprice = fullcart.totalPrice
+        const mathprice = fullcart.totalPrice*85
         req.session.totalPrice = Math.ceil(mathprice)
         res.render('checkout', { message: '',seladdress:seladdress, fulladdress:fulladdress, subtotal: totalprice, fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
 

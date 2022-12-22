@@ -87,8 +87,17 @@ const adminDashboard = async (req, res) => {
                 catorderCount[isExisting]++
             }
         }
-        console.log(categoryArray);
-        console.log(catorderCount);
+        const productNames=[];
+        const salesCount=[];
+        const fetchNames = await Product.find();
+        for(let key of fetchNames){
+            productNames.push(key.productName)
+        }
+        for(let key of fetchNames){
+            salesCount.push(key.qty)
+        }
+        console.log(productNames);
+        console.log(salesCount);
         res.render('dashboard', { name: categoryArray, count: catorderCount })
     }
     catch (error) {
