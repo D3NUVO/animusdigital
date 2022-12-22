@@ -373,8 +373,7 @@ const updateQuantity = async (req, res, next) => {
         productData.cartProduct[productIndex].qty = req.body.qnty
         await productData.save()
 
-        //res.redirect('/cart')
-        res.json({status:true})
+        res.redirect('/cart')
     } catch (error) {
         console.log(error.message);
     }
@@ -655,7 +654,7 @@ const checkout = async (req, res, next) => {
         const totalprice = userCart.totalPrice
         const fullcart = await Cart.findOne({ userID: req.session.userId })
         // const totalPrice = fullcart.totalPrice
-        const mathprice = fullcart.totalPrice*85
+        const mathprice = fullcart.totalPrice/85
         req.session.totalPrice = Math.ceil(mathprice)
         res.render('checkout', { message: '',seladdress:seladdress,fulladdress:fulladdress, subtotal: totalprice, fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
 
@@ -908,7 +907,7 @@ const applyCoupon = async (req, res, next) => {
                 const totalprice = totalcart.totalPrice
                 console.log('Total price is here :', totalprice);
                 const newtotalprice = totalprice - totalprice * (couponDiscount / 100)
-                req.session.totalPrice = Math.ceil(newtotalprice*85)
+                req.session.totalPrice = Math.ceil(newtotalprice/85)
                 console.log(req.session);
                 res.render('checkout', { message: '',seladdress:'', fulladdress:fulladdress, subtotal: totalprice, fullorder: fulluser, coupondisc: req.session.coupondisc, totalPrice: req.session.totalPrice, coupon: req.session.couponcode, count: count, totalprice: '' })
             } else {
@@ -972,7 +971,7 @@ const selectaddress = async (req, res, next) => {
         const totalprice = userCart.totalPrice
         const fullcart = await Cart.findOne({ userID: req.session.userId })
         // const totalPrice = fullcart.totalPrice
-        const mathprice = fullcart.totalPrice*85
+        const mathprice = fullcart.totalPrice/85
         req.session.totalPrice = Math.ceil(mathprice)
         res.render('checkout', { message: '',seladdress:seladdress, fulladdress:fulladdress, subtotal: totalprice, fullorder: fulluser, totalPrice: req.session.totalPrice, coupondisc: req.session.coupondisc, coupon: req.session.couponcode, count: count, totalprice: totalprice })
 
