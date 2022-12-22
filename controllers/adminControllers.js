@@ -391,19 +391,12 @@ const banner = async (req, res) => {
 
 const addbanner = async (req, res) => {
     try {
-        const cop = req.body.couponCode
-        const isExist = await Coupon.findOne({ couponCode: cop })
-        if (isExist == null && cop != '') {
-            const coupons = new Coupon({
-                couponCode: req.body.couponCode,
-                couponDiscount: req.body.couponDiscount
+            const banner = new Banner({
+                bannerImage: req.file.filename,
+                bannerLink: req.body.link
             })
-            await coupons.save()
-            res.redirect('/admin/coupons')
-        } else {
-            console.log("Coupon Exists or Its is null");
-            res.redirect('/admin/coupons')
-        }
+            await banner.save()
+            res.redirect('/admin/banner')
     } catch (error) {
         console.log(error.message);
     }
@@ -496,6 +489,7 @@ module.exports = {
     addcoupon,
     delCoupon,
     banner,
+    addbanner,
     salesreport,
     upload,
     orderDetails,

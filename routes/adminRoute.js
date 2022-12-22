@@ -51,6 +51,8 @@ adminRoute.get('/coupons', adminController.coupon)
 
 adminRoute.get('/banner', adminController.banner)
 
+adminRoute.post('/add-banner', adminController.upload.any(),adminController.banner)
+
 adminRoute.post('/add-coupon', adminController.addcoupon)
 
 adminRoute.post('/delete-coupon', adminController.delCoupon)

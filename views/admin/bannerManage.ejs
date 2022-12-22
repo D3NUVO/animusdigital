@@ -90,20 +90,20 @@
                 <div class="col-lg-8 col-xlg-9 col-md-7">
                     <div class="card">
                         <div class="card-body">
-                            <form class="form-horizontal form-material mx-2" action="/admin/add-coupon" method="post">
+                            <form class="form-horizontal form-material mx-2" action="/admin/add-banner" method="post">
                                 <div class="form-group d-flex">
                                     <div>
-                                        <label class="col-md-12">Add Discount in percent(%)</label>
+                                        <label class="col-md-12">Add Banner</label>
                                         <div class="col-md-12">
-                                            <input type="text"  name="couponDiscount" placeholder="Click Here"
+                                            <input type="file"  name="banner" placeholder="Click Here"
                                                 class="form-control form-control-line" name="category"
                                                 style="width: 180px;">
                                         </div>
                                     </div>
                                     <div>
-                                        <label class="col-md-12">Add Code</label>
+                                        <label class="col-md-12">Banner Link</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="couponCode" placeholder="Click Here"
+                                            <input type="text" name="link" placeholder="Click Here"
                                                 class="form-control form-control-line" name="category"
                                                 style="width: 180px;">
                                         </div>
@@ -113,7 +113,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success text-white">Add coupon</button>
+                                        <button class="btn btn-success text-white">Add Banner</button>
                                     </div>
                                 </div>
                             </form>
@@ -132,24 +132,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% if( coupons.length > 0){ %>
-                                            <% for(let i=1;i <=coupons.length; i++){ %>
+                                        <% if( banner.length > 0){ %>
+                                            <% for(let i=1;i <=banner.length; i++){ %>
                                                 <tr>
                                                     <th scope="row">
                                                         <%= i %>
                                                     </th>
                                                     <td>
-                                                        <%= coupons[i-1].createdAt%>
+                                                        <%= banner[i-1]%>
                                                     </td>
                                                     <td>
-                                                        <%= coupons[i-1].couponCode%>
+                                                        <%= banner[i-1]%>
                                                     </td>
                                                     <td>
-                                                        <%= coupons[i-1].couponDiscount%>%
+                                                        <%= banner[i-1]%>
                                                     </td>
                                                     <td>
                                                         <form
-                                                            action="/admin/delete-coupon?id=<%= coupons[i-1]._id %>"
+                                                            action="/admin/delete-coupon?id=<%= banner[i-1]._id %>"
                                                             method="post">
                                                             <button type="submit" class="btn btn-outline-danger"><i
                                                                     class=" m-r-5 mdi mdi-delete-forever"></i>
@@ -161,19 +161,13 @@
 
                                                 <% }} else { %>
                                                     <tr>
-                                                        <td colspan="5">Coupons Not Found</td>
+                                                        <td colspan="5">Banner Not Found</td>
                                                     </tr>
                                                     <% } %>
 
                                     </tbody>
                                 </table>
                             </div>
-
-
-
-
-
-
 
 
                         </div>
