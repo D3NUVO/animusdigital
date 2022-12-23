@@ -748,8 +748,10 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
 
 const orderCancel = async (req, res, next) => { //for paypal and razor pay
     try {
+        const count = 0
         const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'cancelled' } })
-        res.render('dashboard')
+        res.render('dashboard', { count: count })
+
     } catch (error) {
         console.log(error.message);
     }
