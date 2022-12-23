@@ -738,7 +738,7 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
             const del = await Cart.deleteMany({ userID: req.session.userId })
         const count = 0
         const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
-        res.render('orderSuccess', { count: count,totalprice:0 })
+        res.render('orderSuccess', { count: count })
         }
 
     } catch (error) {
@@ -750,7 +750,7 @@ const orderCancel = async (req, res, next) => { //for paypal and razor pay
     try {
         const count = 0
         const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'cancelled' } })
-        res.render('dashboard', { count: count })
+        res.render('dashboard', { count: count,totalprice:0 })
 
     } catch (error) {
         console.log(error.message);
