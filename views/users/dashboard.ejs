@@ -132,14 +132,18 @@
                                                                 </button>
 
                                                             </form>
-                                                            <form action="/order-cancel?id=<%=order[i-1]._id%>"
-                                                                method="post">
+                                                            <%if(<%=order[i-1].status%> == 'cancelled') {%>
 
-                                                                <button class="btn btn-outline-primary-2" type="submit">
-                                                                    Cancel
-                                                                </button>
-
-                                                            </form>
+                                                            <%}else{%>
+                                                                <form action="/order-cancel?id=<%=order[i-1]._id%>"
+                                                                    method="post">
+    
+                                                                    <button class="btn btn-outline-primary-2" type="submit">
+                                                                        Cancel
+                                                                    </button>
+    
+                                                                </form>
+                                                            <%}%>
                                                         </td>
                                                     </tr>
                                                     <% }} else{ %>
