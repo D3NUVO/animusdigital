@@ -709,6 +709,11 @@ const placeOrder = async (req, res, next) => {
 
 
         if (req.body.payment == 'payPal') {
+            const fullorder = await Order.findOne({ userID: req.session.userId }).sort({
+                createdAt: -1
+            }).limit(1)
+            const orderid = fullorder._id
+            await Order.findOneAndUpdate({ _id: orderid }, { $set: { status: 'billed' } })
             res.render('paypal', { cart: '', totalPrice: req.session.totalPrice, order: fullcart, count: '', totalprice: '' })
         } else if (req.body.payment == 'COD') {
             const userCart = await Cart.findOne({ userID: req.session.userId })
