@@ -102,7 +102,7 @@
                                 <div class="d-md-flex align-items-center">
                                     <div>
                                         <h4 class="card-title">Sales Summary</h4>
-                                        <h5 class="card-subtitle">Overview of Popular Catagory</h5>
+                                        <h5 class="card-subtitle">Overview of Popular Products</h5>
                                     </div>
                                     <div class="ms-auto d-flex no-block align-items-center">
 
@@ -113,6 +113,8 @@
                                     <div class="col-lg-12">
                                         <div>
                                             <div>
+                                                <input id="pname" type="hidden" value="<%=product%>">
+                                                <input id="pcount" type="hidden" value="<%=salescount%>">
                                                 <canvas id="myCharts"></canvas>
                                             </div>
 
@@ -120,14 +122,18 @@
 
                                             <script>
                                                 const ctx = document.getElementById('myCharts');
+                                                const pname=document.getElementById('pname')
+                                                const pcount=document.getElementById('pcount')
+                                                const proname=pname.value.split(',')
+                                                const procount=pcount.value.split(',');
 
                                                 new Chart(ctx, {
                                                     type: 'bar',
                                                     data: {
-                                                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                                        labels: proname,
                                                         datasets: [{
                                                             label: '# of Votes',
-                                                            data: [12, 19, 3, 5, 2, 3],
+                                                            data: procount,
                                                             borderWidth: 1
                                                         }]
                                                     },

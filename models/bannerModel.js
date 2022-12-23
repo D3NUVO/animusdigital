@@ -12,6 +12,16 @@ const bannerSchema = new mongoose.Schema({
         required: true
     },
 
+    bannerHead: {
+        type: String,
+        required: true
+    },
+
+    bannerSub: {
+        type: String,
+        required: true
+    },
+
     uploadedAt:{
         type:Date,
         immutable:true,

@@ -44,9 +44,21 @@ const storage = multer.diskStorage({
 });
 
 
-
-
 const upload = multer({ storage: storage })
+
+
+
+const storages = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../public/productImages'))
+    },
+    filename: function (req, file, cb) {
+        const name = Date.now() + '-' + file.originalname;
+        cb(null, name);
+    }
+});
+
+const uploads = multer({storage: storages}).single('banner')
 
 
 
@@ -98,7 +110,7 @@ const adminDashboard = async (req, res) => {
         }
         console.log(productNames);
         console.log(salesCount);
-        res.render('dashboard', { name: categoryArray, count: catorderCount })
+        res.render('dashboard', { name: categoryArray, count: catorderCount, product:productNames, salescount:salesCount })
     }
     catch (error) {
         console.log(error.message);
@@ -269,7 +281,7 @@ const editProduct = async (req, res) => {
         const id = req.query.id;
         const productData = await Product.findById({ _id: id });
         if (productData) {
-            res.render('editProduct', { products: productData })
+            res.render('editProduct', { products: productData, image:productData.productImage})
         } else {
             console.log('Product not found')
         }
@@ -393,13 +405,21 @@ const addbanner = async (req, res) => {
     try {
             const banner = new Banner({
                 bannerImage: req.file.filename,
-                bannerLink: req.body.link
+                bannerLink: req.body.link,
+                bannerHead: req.body.head,
+                bannerSub: req.body.sub
             })
             await banner.save()
-            res.redirect('/admin/banner')
+            const banners = await Banner.find()
+            res.render('bannerManage', { banner: banners })
     } catch (error) {
         console.log(error.message);
     }
+}
+
+const delBanner = async (req, res, next) => {
+    const del = await Banner.deleteOne({ _id: req.query.id })
+    res.redirect('/admin/banner')
 }
 
 
@@ -490,8 +510,10 @@ module.exports = {
     delCoupon,
     banner,
     addbanner,
+    delBanner,
     salesreport,
     upload,
+    uploads,
     orderDetails,
     isLoggedIn,
     isLoggedOut

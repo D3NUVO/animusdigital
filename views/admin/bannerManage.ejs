@@ -19,7 +19,7 @@
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-5">
-                        <h4 class="page-title">Coupon Management</h4>
+                        <h4 class="page-title">Banner Management</h4>
                         <!-- <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -90,18 +90,18 @@
                 <div class="col-lg-8 col-xlg-9 col-md-7">
                     <div class="card">
                         <div class="card-body">
-                            <form class="form-horizontal form-material mx-2" action="/admin/add-banner" method="post">
+                            <form class="form-horizontal form-material mx-2" action="/admin/add-banner" method="post" enctype="multipart/form-data">
                                 <div class="form-group d-flex">
                                     <div>
                                         <label class="col-md-12">Add Banner</label>
                                         <div class="col-md-12">
-                                            <input type="file"  name="banner" placeholder="Click Here"
+                                            <input type="file"  name="banner"
                                                 class="form-control form-control-line" name="category"
                                                 style="width: 180px;">
                                         </div>
                                     </div>
                                     <div>
-                                        <label class="col-md-12">Banner Link</label>
+                                        <label class="col-md-12">Banner product Link</label>
                                         <div class="col-md-12">
                                             <input type="text" name="link" placeholder="Click Here"
                                                 class="form-control form-control-line" name="category"
@@ -109,11 +109,30 @@
                                         </div>
 
                                     </div>
+                                    <div>
+                                        <label class="col-md-12">Banner Heading</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="head" placeholder="Click Here"
+                                                class="form-control form-control-line" name="category"
+                                                style="width: 180px;">
+                                        </div>
+
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div>
+                                    <label class="col-md-12">Banner subHeading</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="sub" placeholder="Click Here"
+                                            class="form-control form-control-line" name="category"
+                                            style="width: 180px;">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group mt-4">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success text-white">Add Banner</button>
+                                        <button type="submit" class="btn btn-success text-white">Add Banner</button>
                                     </div>
                                 </div>
                             </form>
@@ -128,6 +147,8 @@
                                             <th scope="col">Date added</th>
                                             <th scope="col">Banner Image</th>
                                             <th scope="col">Banner Link</th>
+                                            <th scope="col">Banner Head</th>
+                                            <th scope="col">Banner sub Head</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -139,17 +160,28 @@
                                                         <%= i %>
                                                     </th>
                                                     <td>
-                                                        <%= banner[i-1]%>
+                                                        <%= banner[i-1].uploadedAt.toDateString()%>
                                                     </td>
                                                     <td>
-                                                        <%= banner[i-1]%>
+                                                        <% if(banner[i-1].bannerImage) { %>
+                                                            <img src="./productImages/<%= banner[i-1].bannerImage %>"
+                                                                width="100vw" height="100vh">
+                                                            <% }else{ %>
+                                                                Image Not Found
+                                                                <% } %>
                                                     </td>
                                                     <td>
-                                                        <%= banner[i-1]%>
+                                                        <%= banner[i-1].bannerLink%>
+                                                    </td>
+                                                    <td>
+                                                        <%= banner[i-1].bannerHead%>
+                                                    </td>
+                                                    <td>
+                                                        <%= banner[i-1].bannerSub%>
                                                     </td>
                                                     <td>
                                                         <form
-                                                            action="/admin/delete-coupon?id=<%= banner[i-1]._id %>"
+                                                            action="/admin/delete-banner?id=<%= banner[i-1]._id %>"
                                                             method="post">
                                                             <button type="submit" class="btn btn-outline-danger"><i
                                                                     class=" m-r-5 mdi mdi-delete-forever"></i>

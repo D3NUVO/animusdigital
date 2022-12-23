@@ -101,9 +101,13 @@
                                         
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="file" name="productImage" class="form-control" >
-                            </div>
+                            <%if(image){ %>
+
+                           <% }else{%>
+                                <div class="input-group mb-3">
+                                    <input type="file" name="productImage" class="form-control" >
+                                </div>
+                            <%}%>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button class="btn btn-success text-white">Update Product</button>

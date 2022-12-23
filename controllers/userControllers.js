@@ -6,6 +6,7 @@ const fast2sms = require('fast-two-sms')
 const session = require('express-session')
 const Product = require('../models/productModel')
 const Category = require('../models/categoryModel')
+const Banner = require('../models/bannerModel')
 const Cart = require('../models/cartModel')
 const Wishlist = require('../models/wishlistModel')
 const Address = require('../models/addressModel')
@@ -146,6 +147,8 @@ const otpValidation = async (req, res) => { // run when clicking the otp validat
 
 const index = async (req, res) => {
     try {
+        const banner = await Banner.find({})
+        
         if (req.session.userId) {
             const productData = await Product.find({ isDeleted: 0 }).sort({
                 uploadedAt: -1
@@ -155,9 +158,9 @@ const index = async (req, res) => {
                 if (userCart) {
                     const count = userCart.cartProduct.length
                     const totalprice = userCart.totalPrice
-                    res.render('index', { userSession: req.session.userId, products: productData, count: count, totalprice: totalprice })
+                    res.render('index', {banner:banner, userSession: req.session.userId, products: productData, count: count, totalprice: totalprice })
                 } else {
-                    res.render('index', { userSession: req.session.userId, products: productData, count: 0, totalprice: '' })
+                    res.render('index', {banner:banner, userSession: req.session.userId, products: productData, count: 0, totalprice: '' })
                 }
             }
         } else {
@@ -165,9 +168,9 @@ const index = async (req, res) => {
                 uploadedAt: -1
             }).limit(8)
             if (req.session.userId) {
-                res.render('index', { userSession: req.session.userId, products: productData, count: 0, totalprice: '' })
+                res.render('index', {banner:banner, userSession: req.session.userId, products: productData, count: 0, totalprice: '' })
             } else {
-                res.render('index', { userSession: req.session.userId, products: productData })
+                res.render('index', {banner:banner, userSession: req.session.userId, products: productData })
             }
         }
     } catch (error) {
