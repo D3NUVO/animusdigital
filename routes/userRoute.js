@@ -48,6 +48,8 @@ userRoute.get('/order-success', userController.isLoggedIn, userController.orderS
 
 userRoute.post('/order-details', userController.orderDetails)
 
+userRoute.post('/order-cancel', userController.orderCancel)
+
 userRoute.get('/wish-list', userController.wishlist)
 
 userRoute.get('/add-wishlist', userController.addwishlist)

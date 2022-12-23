@@ -746,6 +746,15 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
     }
 }
 
+const orderCancel = async (req, res, next) => { //for paypal and razor pay
+    try {
+        const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'cancelled' } })
+        res.render('dashboard')
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 
 const orderDetails = async (req, res) => {
     console.log("11");
@@ -1041,5 +1050,6 @@ module.exports = {
     isLoggedIn,
     isLoggedOut,
     ottp,
-    sendMessage
+    sendMessage,
+    orderCancel
 }
