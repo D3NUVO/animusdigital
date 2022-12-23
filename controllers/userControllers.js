@@ -748,9 +748,27 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
 
 const orderCancel = async (req, res, next) => { //for paypal and razor pay
     try {
-        const count = 0
-        const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'cancelled' } })
-        res.render('dashboard', { count: count,totalprice:0 })
+        await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'cancelled' } })
+        const fulluser = await User.findOne({ userID: req.session.userId })
+        const userCart = await Cart.findOne({ userID: req.session.userId })
+        const userOrder = await Order.find({ userID: req.session.userId }).sort({createdAt:-1})
+        const fulladdress = await Address.find({ userID: req.session.userId })
+
+        //var date = new Date(fullorder.createdAt).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
+        if (fulluser) {
+            if (userCart) {
+                const count = userCart.cartProduct.length
+                if (userOrder) {
+                    res.render('dashboard', { fulladdress:fulladdress, fulluser: fulluser, order: userOrder, count: count, totalprice: '' })
+                } else {
+                    res.render('dashboard', { fulladdress:fulladdress, fulluser: fulluser, order: userOrder, count: count, totalprice: '' })
+                }
+            } else {
+                res.render('dashboard', { fulladdress:fulladdress, fulluser: fulluser, order: userOrder, count: 0, totalprice: '' })
+            }
+        } else {
+            res.render('dashboard', { fulladdress:fulladdress, fulluser: fulluser, order: '', count: 0, totalprice: '' })
+        }
 
     } catch (error) {
         console.log(error.message);
