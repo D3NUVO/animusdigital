@@ -148,7 +148,7 @@ const otpValidation = async (req, res) => { // run when clicking the otp validat
 const index = async (req, res) => {
     try {
         const banner = await Banner.find({})
-        
+
         if (req.session.userId) {
             const productData = await Product.find({ isDeleted: 0 }).sort({
                 uploadedAt: -1
@@ -732,8 +732,7 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
         if(req.query.id){
             const del = await Cart.deleteMany({ userID: req.session.userId })
         const count = 0
-        const order = await Order.findOneAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
-
+        const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
         res.render('orderSuccess', { count: count })
         }
 
