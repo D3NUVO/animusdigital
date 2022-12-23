@@ -738,7 +738,7 @@ const orderSuccess = async (req, res, next) => { //for paypal and razor pay
             const del = await Cart.deleteMany({ userID: req.session.userId })
         const count = 0
         const order = await Order.findByIdAndUpdate({ _id: req.query.id }, { $set: { status: 'billed' } })
-        res.render('orderSuccess', { count: count })
+        res.render('orderSuccess', { count: count,totalprice:0 })
         }
 
     } catch (error) {
